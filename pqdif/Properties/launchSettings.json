@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "pqdif (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "pqdif (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
