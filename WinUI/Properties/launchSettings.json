@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "pqdif (Package)": {
+    "WinUI (Package)": {
       "commandName": "MsixPackage"
     },
-    "pqdif (Unpackaged)": {
+    "WinUI (Unpackaged)": {
       "commandName": "Project"
     }
   }
