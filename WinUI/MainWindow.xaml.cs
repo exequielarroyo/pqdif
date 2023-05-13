@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -39,8 +40,8 @@ namespace WinUI
             myButton.Content = "Clicked";
         }
 
-        public Blog Blog { get; set; } 
-        public List<Blog> Blogs { get; set; }
+        public Blog Blog { get; set; }
+        public ObservableCollection<Blog> Blogs { get; set; } = new();
 
         private void load(object sender, WindowActivatedEventArgs e)
         {
@@ -49,7 +50,11 @@ namespace WinUI
             DbSet<Blog> blogs = databaseContext.Blogs;
 
             this.Blog = blogs.First();
-            this.Blogs = blogs.ToList();
+
+            foreach (Blog blog in blogs)
+            {
+                this.Blogs.Add(blog);
+            }
 
             //textBox.Text = blogs.First().Url;
 
