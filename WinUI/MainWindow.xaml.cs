@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using Data.Access;
+using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -37,8 +39,19 @@ namespace WinUI
             myButton.Content = "Clicked";
         }
 
+        public Blog Blog { get; set; } 
+        public List<Blog> Blogs { get; set; }
+
         private void load(object sender, WindowActivatedEventArgs e)
         {
+            DatabaseContext databaseContext = new DatabaseContext();
+
+            DbSet<Blog> blogs = databaseContext.Blogs;
+
+            this.Blog = blogs.First();
+            this.Blogs = blogs.ToList();
+
+            //textBox.Text = blogs.First().Url;
 
         }
     }

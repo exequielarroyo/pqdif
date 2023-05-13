@@ -7,12 +7,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:models="using:Data.Models"
     mc:Ignorable="d"
     Activated="load">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
         
+        <!--<ListView ItemsSource="{x:Bind Blog}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Blog">
+                    <TextBlock x:Name="text" Text="{x:Bind Url}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+        
+        <TextBox x:Name="textBox" Text="{x:Bind Blog.Url}"/>
     </StackPanel>
 </Window>

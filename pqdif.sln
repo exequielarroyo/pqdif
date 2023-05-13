@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsApp", "WinFormsApp\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinUI", "WinUI\WinUI.csproj", "{7D917C79-DE16-4D92-9EAE-83BFE6C895A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{399DDDDE-AA3C-4E89-9E61-A507AE1F0595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{399DDDDE-AA3C-4E89-9E61-A507AE1F0595}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

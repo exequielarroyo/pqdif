@@ -50,6 +50,9 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="BlankPage1.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
