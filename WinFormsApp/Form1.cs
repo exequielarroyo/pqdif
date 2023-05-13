@@ -19,12 +19,17 @@ namespace WinFormsApp1
             //databaseContext.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
             //databaseContext.SaveChanges();
 
-            List<Blog> blogs = databaseContext.Blogs.ToList();
-            foreach (Blog blog in blogs)
-            {
-                Console.Write(blog.BlogId);
-                Console.WriteLine(blog.Url);
-            }
+            DbSet<Blog> blogs = databaseContext.Blogs;
+
+            var data = from blog in blogs
+                       where blog.BlogId == 1
+                       select blog;
+
+            //foreach (Blog blog in blogs)
+            //{
+            //    Console.Write(blog.BlogId);
+            //    Console.WriteLine(blog.Url);
+            //}
         }
     }
 }
