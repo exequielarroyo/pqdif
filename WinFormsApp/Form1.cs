@@ -1,3 +1,5 @@
+using Data.Access;
+using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
@@ -9,34 +11,20 @@ namespace WinFormsApp1
         {
             InitializeComponent();
         }
-        public class DatabaseContext : DbContext
-        {
-            public DbSet<Blog> Blogs { get; set; }
-            public DbSet<Post> Posts { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            DatabaseContext databaseContext = new DatabaseContext();
+
+            //databaseContext.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
+            //databaseContext.SaveChanges();
+
+            List<Blog> blogs = databaseContext.Blogs.ToList();
+            foreach (Blog blog in blogs)
             {
-                optionsBuilder.UseSqlite(
-                    @"Data Source=asdf.db; Foreign Keys=True;");
+                Console.Write(blog.BlogId);
+                Console.WriteLine(blog.Url);
             }
-        }
-
-        public class Blog
-        {
-            public int BlogId { get; set; }
-            public string Url { get; set; }
-            public int Rating { get; set; }
-            public List<Post> Posts { get; set; }
-        }
-
-        public class Post
-        {
-            public int PostId { get; set; }
-            public string Title { get; set; }
-            public string Content { get; set; }
-
-            public int BlogId { get; set; }
-            public Blog Blog { get; set; }
         }
     }
 }
