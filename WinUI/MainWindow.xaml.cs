@@ -3,6 +3,7 @@
 
 using Data.Access;
 using Data.Models;
+using Gemstone.PQDIF.Logical;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -33,6 +34,8 @@ namespace WinUI
         public MainWindow()
         {
             this.InitializeComponent();
+            this.get_Data();
+            this.get_PQDIF_Data();
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
@@ -45,6 +48,11 @@ namespace WinUI
 
         private void load(object sender, WindowActivatedEventArgs e)
         {
+
+        }
+
+        private void get_Data()
+        {
             DatabaseContext databaseContext = new DatabaseContext();
 
             DbSet<Blog> blogs = databaseContext.Blogs;
@@ -56,7 +64,21 @@ namespace WinUI
                 this.Blogs.Add(blog);
             }
 
-            //textBox.Text = blogs.First().Url;
+            //var data = from blog in blogs
+            //           where blog.BlogId == 1
+            //           select blog;
+
+            textBox.Text = blogs.First().Url;
+        }
+
+        async private void get_PQDIF_Data()
+        {
+            string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string path = Path.Combine(documents, "example-pqdif-native/example 01.pqd");
+
+            LogicalParser logicalParser = new LogicalParser(path);
+            await logicalParser.OpenAsync();
+            ObservationRecord observationRecord = await logicalParser.NextObservationRecordAsync();
 
         }
     }
