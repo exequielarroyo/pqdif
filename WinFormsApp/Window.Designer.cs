@@ -1,6 +1,6 @@
-﻿namespace WinFormsApp1
+﻿namespace WinFormsApp
 {
-    partial class Form1
+    partial class Window
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,13 +30,13 @@
         {
             SuspendLayout();
             // 
-            // Form1
+            // Window
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Window";
+            Text = "PQDIF";
             Load += Form1_Load;
             ResumeLayout(false);
         }
