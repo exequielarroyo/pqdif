@@ -11,26 +11,39 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d"
-    Activated="load">
+    Activated="load"
+    >
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-    <NavigationView x:Name="navigationView"
-                            Header="This is Header Text"
+        <Border x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock x:Name="AppTitle" Style="{StaticResource CaptionTextBlockStyle}" Text="App2" VerticalAlignment="Top" Margin="8,8,0,8"/>
+        </Border>
+        
+        <NavigationView Grid.Row="1" x:Name="navigationView"
                             PaneDisplayMode="Auto"
                             ItemInvoked="navigationView_ItemInvoked"
-                            IsBackButtonVisible="Collapsed">
-        <NavigationView.MenuItems>
-            <NavigationViewItem Content="Browse" Tag="Browse" Icon="Library" />
-            <NavigationViewItem Content="Track an Order" Tag="SamplePage2" Icon="Map" />
-            <NavigationViewItem Content="Order History" Tag="SamplePage3" Icon="Tag" />
-        </NavigationView.MenuItems>
-        <NavigationView.FooterMenuItems>
-            <NavigationViewItem Content="Account" Tag="SamplePage4" Icon="Contact" />
-            <NavigationViewItem Content="Your Cart" Tag="SamplePage5" Icon="Shop" />
-            <NavigationViewItem Content="Help" Tag="SamplePage5" Icon="Help" />
-        </NavigationView.FooterMenuItems>
-        <Frame x:Name="contentFrame" />
-    </NavigationView>
+                            Loaded="navigationView_Loaded"
+                            IsBackButtonVisible="Collapsed"
+                            IsSettingsVisible="False">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Browse" Tag="Browse" Icon="Library" />
+                <NavigationViewItem Content="Track an Order" Tag="SamplePage2" Icon="Map" />
+                <!--<NavigationViewItem Content="Order History" Tag="SamplePage3" Icon="Tag" />-->
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <!--<NavigationViewItem Content="Account" Tag="SamplePage4" Icon="Contact" />-->
+                <!--<NavigationViewItem Content="Your Cart" Tag="SamplePage5" Icon="Shop" />-->
+                <!--<NavigationViewItem Content="Help" Tag="SamplePage5" Icon="Help" />-->
+            </NavigationView.FooterMenuItems>
 
+            <Frame x:Name="contentFrame" />
+
+        </NavigationView>
+    </Grid>
     <!--<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
 
