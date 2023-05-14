@@ -12,12 +12,11 @@ namespace Data.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Channel> Channels { get; }
-
         [Column(TypeName = "tinyint")]
         public int TriggerMethod { get; set; }
         public DateTime TimeTriggered { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime CreateTime { get; set; }
+        public List<Channel> Channels { get; }
     }
 }
