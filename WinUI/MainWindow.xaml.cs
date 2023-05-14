@@ -3,6 +3,7 @@
 
 using Data.Access;
 using Data.Models;
+using Gemstone.Collections.CollectionExtensions;
 using Gemstone.PQDIF.Logical;
 using GSF.Xml;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,7 @@ namespace WinUI
         public Blog Blog { get; set; }
         public ObservableCollection<Blog> Blogs { get; set; } = new();
         public DatabaseContext Database = new DatabaseContext();
+        private ObservableCollection<ObservationRecord> Observations{ get; set; } = new();
 
         private void load(object sender, WindowActivatedEventArgs e)
         {
@@ -94,8 +96,15 @@ namespace WinUI
 
             LogicalParser logicalParser = new LogicalParser(path);
             await logicalParser.OpenAsync();
-            ObservationRecord observationRecord = await logicalParser.NextObservationRecordAsync();
+            //ObservationRecord observationRecord = await logicalParser.NextObservationRecordAsync();
 
+            do
+            {
+                this.Observations.Add(await logicalParser.NextObservationRecordAsync());
+            } while (await logicalParser.HasNextObservationRecordAsync());
+
+
+            // SAVE TO DATABASE
             //foreach (ChannelInstance channel in observationRecord.ChannelInstances)
             //{
             //    foreach (SeriesInstance series in channel.SeriesInstances)
