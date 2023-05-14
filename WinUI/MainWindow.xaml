@@ -14,7 +14,7 @@
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
         
-        <ListView ItemsSource="{x:Bind Blogs}">
+        <!--<ListView ItemsSource="{x:Bind Blogs}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local1:Blog">
                     <StackPanel>
@@ -23,7 +23,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
         
         <TextBox x:Name="textBox" PlaceholderText="Url" Text="{x:Bind Blog.Url}"/>
         <TextBlock Text="{x:Bind Blog.Url}"/>

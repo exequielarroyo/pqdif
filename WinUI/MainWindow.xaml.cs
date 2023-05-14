@@ -4,6 +4,7 @@
 using Data.Access;
 using Data.Models;
 using Gemstone.PQDIF.Logical;
+using GSF.Xml;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -18,6 +19,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.Json;
+using System.Xml;
+using Windows.ApplicationModel.VoiceCommands;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -45,6 +49,7 @@ namespace WinUI
 
         public Blog Blog { get; set; }
         public ObservableCollection<Blog> Blogs { get; set; } = new();
+        public DatabaseContext Database = new DatabaseContext();
 
         private void load(object sender, WindowActivatedEventArgs e)
         {
@@ -53,22 +58,33 @@ namespace WinUI
 
         private void get_Data()
         {
-            DatabaseContext databaseContext = new DatabaseContext();
-
-            DbSet<Blog> blogs = databaseContext.Blogs;
-
-            this.Blog = blogs.First();
-
-            foreach (Blog blog in blogs)
+            DbSet<Series> series = Database.Series;
+            foreach (var data in series)
             {
-                this.Blogs.Add(blog);
+                //string values = JsonSerializer.Deserialize<string>(data.Values);
+
+                string[] stringNumbers = data.Values.Trim('[', ']').Split(',');
+
+                double[] numbers = new double[stringNumbers.Length];
+                for (int i = 0; i < stringNumbers.Length; i++)
+                {
+                    //double.TryParse(stringNumbers[i].Trim(), out numbers[i]);
+                    numbers[i] = double.Parse(stringNumbers[i].Trim());
+                }
             }
 
-            //var data = from blog in blogs
-            //           where blog.BlogId == 1
-            //           select blog;
+            //this.series = series.First();
 
-            textBox.Text = blogs.First().Url;
+            //foreach (Blog blog in blogs)
+            //{
+            //    this.Blogs.Add(blog);
+            //}
+
+            ////var data = from blog in blogs
+            ////           where blog.BlogId == 1
+            ////           select blog;
+
+            //textBox.Text = blogs.First().Url;
         }
 
         async private void get_PQDIF_Data()
@@ -80,6 +96,25 @@ namespace WinUI
             await logicalParser.OpenAsync();
             ObservationRecord observationRecord = await logicalParser.NextObservationRecordAsync();
 
+            //foreach (ChannelInstance channel in observationRecord.ChannelInstances)
+            //{
+            //    foreach (SeriesInstance series in channel.SeriesInstances)
+            //    {
+            //        this.Database.Series.Add(new Series()
+            //        {
+            //            Offset = series.SeriesOffset.GetInt4(),
+            //            Scale = series.SeriesScale.GetInt4(),
+            //            Values = JsonSerializer.Serialize(series.OriginalValues),
+            //        });
+            //    }
+            //}
+            //Database.SaveChanges();
         }
+
+        //private void save_To_XML()
+        //{
+        //    XmlDocument xmlDocument = new XmlDocument();
+        //    XmlExtensions.GetXmlNode()
+        //}
     }
 }
