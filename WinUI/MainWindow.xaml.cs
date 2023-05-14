@@ -45,7 +45,8 @@ namespace WinUI
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked";
+            //myButton.Content = "Saved";
+            this.save_To_XML();
         }
 
         public Blog Blog { get; set; }
@@ -120,10 +121,64 @@ namespace WinUI
             //Database.SaveChanges();
         }
 
-        //private void save_To_XML()
-        //{
-        //    XmlDocument xmlDocument = new XmlDocument();
-        //    XmlExtensions.GetXmlNode()
-        //}
+        private void save_To_XML()
+        {
+            string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string path = Path.Combine(documents, @"example-pqdif-native\sample.xml");
+
+            XmlDocument xmlDocument = new XmlDocument();
+            //xmlDocument.Load(path);
+            xmlDocument.LoadXml("<?xml version=\"1.0\"?> \n" +
+    "<books xmlns=\"http://www.contoso.com/books\"> \n" +
+    "  <book genre=\"novel\" ISBN=\"1-861001-57-8\" publicationdate=\"1823-01-28\"> \n" +
+    "    <title>Pride And Prejudice</title> \n" +
+    "    <price>24.95</price> \n" +
+    "  </book> \n" +
+    "  <book genre=\"novel\" ISBN=\"1-861002-30-1\" publicationdate=\"1985-01-01\"> \n" +
+    "    <title>The Handmaid's Tale</title> \n" +
+    "    <price>29.95</price> \n" +
+    "  </book> \n" +
+    "</books>");
+
+            //XmlElement root = xmlDocument.CreateElement("Root");
+            //root.AppendChild(xmlDocument.CreateNode(XmlNodeType.Element, "Child", null));
+            //xmlDocument.AppendChild(root);
+
+            //xmlDocument.Save(path);
+            XmlNode xmlNode = XmlExtensions.GetXmlNode(xmlDocument, path);
+        }
+
+        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
+{
+    ("Browse", typeof(BlankPage1)),
+};
+        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
+        {
+            var tag = sender;
+            //Type _page = null;
+            //if (e.SelectedItemContainer != null)
+            //{
+            //    var item = _pages.FirstOrDefault(p => p.Tag.Equals(e.SelectedItem));
+            //    _page = item.Page;
+            //    contentFrame.Navigate("SamplePage1", e.RecommendedNavigationTransitionInfo);
+            //}
+        }
+
+        private void navigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            Type to = null;
+            switch (args.InvokedItem.ToString())
+            {
+                case "Browse":
+                    to=typeof(BlankPage1);
+                    break;
+                case "Track an Order":
+                    to = typeof(BlankPage2);
+                    break;
+                default:
+                    break;
+            }
+            contentFrame.Navigate(to, args.RecommendedNavigationTransitionInfo);
+        }
     }
 }

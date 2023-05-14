@@ -13,9 +13,27 @@
     mc:Ignorable="d"
     Activated="load">
 
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <NavigationView x:Name="navigationView"
+                            Header="This is Header Text"
+                            PaneDisplayMode="Auto"
+                            ItemInvoked="navigationView_ItemInvoked"
+                            IsBackButtonVisible="Collapsed">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Browse" Tag="Browse" Icon="Library" />
+            <NavigationViewItem Content="Track an Order" Tag="SamplePage2" Icon="Map" />
+            <NavigationViewItem Content="Order History" Tag="SamplePage3" Icon="Tag" />
+        </NavigationView.MenuItems>
+        <NavigationView.FooterMenuItems>
+            <NavigationViewItem Content="Account" Tag="SamplePage4" Icon="Contact" />
+            <NavigationViewItem Content="Your Cart" Tag="SamplePage5" Icon="Shop" />
+            <NavigationViewItem Content="Help" Tag="SamplePage5" Icon="Help" />
+        </NavigationView.FooterMenuItems>
+        <Frame x:Name="contentFrame" />
+    </NavigationView>
+
+    <!--<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-        
+
         <ListView ItemsSource="{x:Bind Observations}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local2:ObservationRecord">
@@ -25,9 +43,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
         <TextBox x:Name="textBox" PlaceholderText="Url" Text="{x:Bind Blog.Url}"/>
         <TextBlock Text="{x:Bind Blog.Url}"/>
 
-    </StackPanel>
+    </StackPanel>-->
 </Window>
