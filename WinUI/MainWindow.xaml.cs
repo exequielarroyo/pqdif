@@ -161,10 +161,6 @@ namespace WinUI
             XmlNode xmlNode = XmlExtensions.GetXmlNode(xmlDocument, path);
         }
 
-        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
-{
-    ("Browse", typeof(BlankPage1)),
-};
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
         {
             var tag = sender;
@@ -182,11 +178,15 @@ namespace WinUI
             Type to = null;
             switch (args.InvokedItem)
             {
-                case "Browse":
+                case "SQLite":
                     to = typeof(BlankPage1);
+                    navigationView.Header = "Working with SQLite";
+                    navigationView.PaneTitle = "Working with SQLite";
                     break;
-                case "Track an Order":
+                case "XML":
                     to = typeof(BlankPage2);
+                    navigationView.Header = "Working with XML";
+                    navigationView.PaneTitle = "Working with XML";
                     break;
                 default:
                     break;
@@ -268,7 +268,6 @@ namespace WinUI
                 case ElementTheme.Default: m_configurationSource.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Default; break;
             }
         }
-
     }
 
     class WindowsSystemDispatcherQueueHelper

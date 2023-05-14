@@ -19,19 +19,25 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top" Background="{ThemeResource SmokeFillColorDefaultBrush}">
             <TextBlock x:Name="AppTitle" Style="{StaticResource CaptionTextBlockStyle}" Text="App2" VerticalAlignment="Top" Margin="8,8,0,8"/>
-        </Border>
+        </Grid>
         
         <NavigationView Grid.Row="1" x:Name="navigationView"
+                            Header="Working with SQLite"
+                            PaneTitle="Working with SQLite"
                             PaneDisplayMode="Auto"
                             ItemInvoked="navigationView_ItemInvoked"
                             Loaded="navigationView_Loaded"
                             IsBackButtonVisible="Collapsed"
                             IsSettingsVisible="False">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Browse" Tag="Browse" Icon="Library" />
-                <NavigationViewItem Content="Track an Order" Tag="SamplePage2" Icon="Map" />
+                <NavigationViewItem Content="SQLite" Tag="SQLite" Icon="ProtectedDocument" >
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge Value="7"/>
+                    </NavigationViewItem.InfoBadge>
+                </NavigationViewItem>
+                <NavigationViewItem Content="XML" Tag="XML" Icon="Page" />
                 <!--<NavigationViewItem Content="Order History" Tag="SamplePage3" Icon="Tag" />-->
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>

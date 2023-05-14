@@ -12,13 +12,15 @@
     mc:Ignorable="d">
 
     <Grid>
-        <ContentDialog Content="Testing" 
+        <ContentDialog
                        Title="Save to SQLite?" 
                        x:Name="dialog" 
                        CloseButtonText="Close"
                        PrimaryButtonText="Save"
                        DefaultButton="Primary"
-                       Style="{ThemeResource DefaultContentDialogStyle}"/>
+                       Style="{ThemeResource DefaultContentDialogStyle}">
+            <ProgressRing x:Name="dialogLoading" IsActive="False" />
+        </ContentDialog>
 
         <StackPanel>
             <Button x:Name="PickAFileButton" Content="Open a file"

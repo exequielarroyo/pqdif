@@ -46,6 +46,7 @@ namespace WinUI
 
             if (result.Equals(ContentDialogResult.Primary))
             {
+                dialogLoading.IsActive = false;
                 foreach (ObservationRecord observation in Observations)
                 {
                     foreach (ChannelInstance channel in observation.ChannelInstances)
@@ -62,6 +63,7 @@ namespace WinUI
                     }
                 }
                 Database.SaveChanges();
+                dialogLoading.IsActive = true;
             }
         }
 
