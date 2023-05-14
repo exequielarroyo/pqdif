@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using Data.Access;
+using Data.Models;
 using Gemstone.PQDIF.Logical;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -15,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -35,9 +38,31 @@ namespace WinUI
             this.InitializeComponent();
         }
 
+        public DatabaseContext Database = new DatabaseContext();
+
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             ContentDialogResult result= await dialog.ShowAsync();
+
+            if (result.Equals(ContentDialogResult.Primary))
+            {
+                foreach (ObservationRecord observation in Observations)
+                {
+                    foreach (ChannelInstance channel in observation.ChannelInstances)
+                    {
+                        foreach (SeriesInstance series in channel.SeriesInstances)
+                        {
+                            this.Database.Series.Add(new Series()
+                            {
+                                Offset = series.SeriesOffset.GetInt4(),
+                                Scale = series.SeriesScale.GetInt4(),
+                                Values = JsonSerializer.Serialize(series.OriginalValues),
+                            });
+                        }
+                    }
+                }
+                Database.SaveChanges();
+            }
         }
 
         private ObservableCollection<ObservationRecord> Observations { get; set; } = new();
@@ -66,20 +91,20 @@ namespace WinUI
             if (file != null)
             {
                 PickAFileOutputTextBlock.Text = "Picked file: " + file.Name;
+
+                LogicalParser logicalParser = new LogicalParser(file.Path);
+                await logicalParser.OpenAsync();
+                this.Observations.Clear();
+                do
+                {
+                    this.Observations.Add(await logicalParser.NextObservationRecordAsync());
+                } while (await logicalParser.HasNextObservationRecordAsync());
+                await logicalParser.CloseAsync();
             }
             else
             {
                 PickAFileOutputTextBlock.Text = "Operation cancelled.";
             }
-
-            LogicalParser logicalParser = new LogicalParser(file.Path);
-            await logicalParser.OpenAsync();
-            this.Observations.Clear();
-            do
-            {
-                this.Observations.Add(await logicalParser.NextObservationRecordAsync());
-            } while (await logicalParser.HasNextObservationRecordAsync());
-            await logicalParser.CloseAsync();
         }
     }
 }
