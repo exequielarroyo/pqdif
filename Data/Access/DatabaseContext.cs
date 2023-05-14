@@ -10,15 +10,16 @@ namespace Data.Access
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Observation> Observation { get; set; }
+        public DbSet<Channel> Channel { get; set; }
+        public DbSet<Series> Series { get; set; }
         public string DbPath { get; }
 
         public DatabaseContext()
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
-            DbPath = Path.Join(path, "sqlite.db");
+            DbPath = Path.Join(path, @"PQDIF\sqlite.db");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
