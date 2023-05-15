@@ -36,6 +36,7 @@ using Windows.ApplicationModel.Core;
 using System.Drawing;
 using WinUIEx;
 using CommunityToolkit.WinUI;
+using Windows.Networking.Connectivity;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -57,10 +58,28 @@ public sealed partial class MainWindow : WindowEx
         //AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/StoreLogo.png"));
         //Title = "PQDIF";
         //TrySetSystemBackdrop();
+        NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
 
         this.get_Data();
         this.get_PQDIF_Data();
         
+    }
+
+    private void NetworkInformation_NetworkStatusChanged(object sender) 
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+            var level = profile?.GetNetworkConnectivityLevel() ?? NetworkConnectivityLevel.None;
+            if (level == NetworkConnectivityLevel.InternetAccess)
+            {
+                AppTitleBarText.Text = "Internet Connected";
+            }
+            else
+            {
+                AppTitleBarText.Text = "No Internet Connection";
+            }
+        });
     }
 
     private void myButton_Click(object sender, RoutedEventArgs e)
