@@ -1,4 +1,7 @@
-﻿namespace Data.Models;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Data.Models;
 public class Container
 {
     public int Id
@@ -22,6 +25,25 @@ public class Container
         set;
     }
     public string Comments
+    {
+        get;
+        set;
+    }
+
+    [DefaultValue(0)]
+    public bool IsSync
+    {
+        get;
+        set;
+    }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime CreatedAt
+    {
+        get;
+        set;
+    }
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime UpdatedAt
     {
         get;
         set;
