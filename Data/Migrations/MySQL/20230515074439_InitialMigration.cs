@@ -114,7 +114,7 @@ namespace Data.Migrations.MySQL
                     Offset = table.Column<int>(type: "int", nullable: false),
                     Scale = table.Column<int>(type: "int", nullable: false),
                     Values = table.Column<string>(type: "longtext", nullable: false),
-                    IsSync = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
+                    IsSync = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
                     ChannelId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

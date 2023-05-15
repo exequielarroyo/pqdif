@@ -120,7 +120,7 @@ namespace Data.Migrations.MySQL
                     b.Property<bool>("IsSync")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(true);
 
                     b.Property<int>("Offset")
                         .HasColumnType("int");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Access;
@@ -12,5 +13,12 @@ public class MySQLContext : DatabaseContext
     {
         var connectionString = "server=localhost;database=pqdif;user=root;";
         optionsBuilder.UseMySQL(connectionString);
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Series>()
+            .Property(c => c.IsSync)
+            .HasDefaultValue(true);
     }
 }

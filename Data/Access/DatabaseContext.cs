@@ -36,10 +36,5 @@ public class DatabaseContext : DbContext
         get; set;
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Series>()
-            .Property(c => c.IsSync)
-            .HasDefaultValue(false);
-    }
+    
 }
