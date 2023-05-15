@@ -29,7 +29,6 @@
   <ItemGroup>
     <PackageReference Include="Gemstone.Data" Version="1.0.87" />
     <PackageReference Include="Gemstone.PQDIF" Version="1.0.87" />
-    <PackageReference Include="GSF.Core" Version="2.4.28" />
     <PackageReference Include="H.OxyPlot.WinUI" Version="0.9.30" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">

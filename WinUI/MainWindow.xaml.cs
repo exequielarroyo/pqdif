@@ -1,42 +1,19 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using WinRT; // required to support Window.As<ICompositionSupportsSystemBackdrop>()
-using Microsoft.UI.Composition.SystemBackdrops;
-using System.Runtime.InteropServices; // For DllImport
-using CommunityToolkit.WinUI.UI.Triggers;
 using Data.Access;
-using Data.Models;
-using Gemstone.Collections.CollectionExtensions;
 using Gemstone.PQDIF.Logical;
-using GSF;
-using GSF.Xml;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.UI.Composition.SystemBackdrops;
-using Microsoft.UI.Windowing;
+//using GSF.Xml;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text.Json;
 using System.Xml;
-using Windows.ApplicationModel.VoiceCommands;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.ApplicationModel.Core;
-using System.Drawing;
 using WinUIEx;
-using CommunityToolkit.WinUI;
 using Windows.Networking.Connectivity;
+using Data.Models;
+using System.Linq;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -62,18 +39,42 @@ public sealed partial class MainWindow : WindowEx
 
         this.get_Data();
         this.get_PQDIF_Data();
-        
+
     }
 
-    private void NetworkInformation_NetworkStatusChanged(object sender) 
+    private DatabaseContext SQLite;
+    private DatabaseContext MySQL;
+    private async void NetworkInformation_NetworkStatusChanged(object sender)
     {
-        DispatcherQueue.TryEnqueue(() =>
+        DispatcherQueue.TryEnqueue(async () =>
         {
             ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
             var level = profile?.GetNetworkConnectivityLevel() ?? NetworkConnectivityLevel.None;
             if (level == NetworkConnectivityLevel.InternetAccess)
             {
                 AppTitleBarText.Text = "Internet Connected";
+                ContentDialogResult result = await dialog2.ShowAsync();
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    MySQL = new MySQLContext();
+                    SQLite = new SQLiteContext();
+
+                    dialogLoading.IsActive = true;
+
+                    var seriesToSync = from series in SQLite.Series.ToList()
+                    where series.IsSync == false
+                    select series;
+                    
+
+                    MySQL.Series.AddRange(seriesToSync);
+                    MySQL.SaveChanges();
+
+                    seriesToSync.ToList().ForEach(s => s.IsSync = true);
+                    SQLite.SaveChanges();
+
+                    dialogLoading.IsActive = false;
+                }
             }
             else
             {
@@ -88,10 +89,8 @@ public sealed partial class MainWindow : WindowEx
         this.save_To_XML();
     }
 
-    public Blog Blog { get; set; }
-    public ObservableCollection<Blog> Blogs { get; set; } = new();
-    public DatabaseContext Database = new();
-    private ObservableCollection<ObservationRecord> Observations{ get; set; } = new();
+    //public DatabaseContext Database = new();
+    //private ObservableCollection<ObservationRecord> Observations{ get; set; } = new();
 
     private void load(object sender, WindowActivatedEventArgs e)
     {
@@ -100,20 +99,20 @@ public sealed partial class MainWindow : WindowEx
 
     private void get_Data()
     {
-        DbSet<Series> series = Database.Series;
-        foreach (var data in series)
-        {
-            //string values = JsonSerializer.Deserialize<string>(data.Values);
+        //DbSet<Series> series = Database.Series;
+        //foreach (var data in series)
+        //{
+        //    //string values = JsonSerializer.Deserialize<string>(data.Values);
 
-            string[] stringNumbers = data.Values.Trim('[', ']').Split(',');
+        //    string[] stringNumbers = data.Values.Trim('[', ']').Split(',');
 
-            double[] numbers = new double[stringNumbers.Length];
-            for (int i = 0; i < stringNumbers.Length; i++)
-            {
-                //double.TryParse(stringNumbers[i].Trim(), out numbers[i]);
-                numbers[i] = double.Parse(stringNumbers[i].Trim());
-            }
-        }
+        //    double[] numbers = new double[stringNumbers.Length];
+        //    for (int i = 0; i < stringNumbers.Length; i++)
+        //    {
+        //        //double.TryParse(stringNumbers[i].Trim(), out numbers[i]);
+        //        numbers[i] = double.Parse(stringNumbers[i].Trim());
+        //    }
+        //}
 
         //this.series = series.First();
 
@@ -131,17 +130,17 @@ public sealed partial class MainWindow : WindowEx
 
     private async void get_PQDIF_Data()
     {
-        string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string path = Path.Combine(documents, "example-pqdif-native/example 01.pqd");
+        //string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //string path = Path.Combine(documents, "example-pqdif-native/example 01.pqd");
 
-        LogicalParser logicalParser = new LogicalParser(path);
-        await logicalParser.OpenAsync();
-        //ObservationRecord observationRecord = await logicalParser.NextObservationRecordAsync();
+        //LogicalParser logicalParser = new LogicalParser(path);
+        //await logicalParser.OpenAsync();
+        ////ObservationRecord observationRecord = await logicalParser.NextObservationRecordAsync();
 
-        do
-        {
-            this.Observations.Add(await logicalParser.NextObservationRecordAsync());
-        } while (await logicalParser.HasNextObservationRecordAsync());
+        //do
+        //{
+        //    this.Observations.Add(await logicalParser.NextObservationRecordAsync());
+        //} while (await logicalParser.HasNextObservationRecordAsync());
 
 
         // SAVE TO DATABASE
@@ -184,7 +183,7 @@ public sealed partial class MainWindow : WindowEx
         //xmlDocument.AppendChild(root);
 
         //xmlDocument.Save(path);
-        XmlNode xmlNode = XmlExtensions.GetXmlNode(xmlDocument, path);
+        //XmlNode xmlNode = XmlExtensions.GetXmlNode(xmlDocument, path);
     }
 
     private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)

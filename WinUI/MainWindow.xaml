@@ -16,12 +16,24 @@
     <windowex:WindowEx.Backdrop>
         <windowex:MicaSystemBackdrop />
     </windowex:WindowEx.Backdrop>
+    
+    
 
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <ContentDialog
+                       Title="Sync locally saved data?" 
+                       x:Name="dialog2" 
+                       CloseButtonText="Close"
+                       PrimaryButtonText="Sync"
+                       DefaultButton="Primary"
+                       Style="{ThemeResource DefaultContentDialogStyle}">
+            <ProgressRing x:Name="dialogLoading" IsActive="False" />
+        </ContentDialog>
 
         <Grid x:Name="AppTitleBar"
               Canvas.ZIndex="1"
