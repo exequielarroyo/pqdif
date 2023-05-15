@@ -14,9 +14,24 @@ namespace Data.Models
         public string Name { get; set; }
         [Column(TypeName = "tinyint")]
         public int TriggerMethod { get; set; }
-        public DateTime TimeTriggered { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime CreateTime { get; set; }
-        public List<Channel> Channels { get; }
+        public DateTime TriggeredAt { get; set; }
+        public DateTime StartAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        //RELATIONSHIPS
+        public int SourceId
+        {
+            get;
+            set;
+        }
+        public List<Channel> Channels
+        {
+            get;
+        }
+        public Container Container
+        {
+            get;
+            set;
+        }
     }
 }

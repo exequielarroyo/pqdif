@@ -12,5 +12,17 @@ namespace Data.Models
         public int Offset { get; set; }
         public int Scale { get; set; }
         public string Values { get; set; }
+
+        //RELATIONSHIPS
+        public int ChannelId
+        {
+            get;
+            set;
+        }
+        public Channel Channel
+        {
+            get;
+            set;
+        }
     }
 }

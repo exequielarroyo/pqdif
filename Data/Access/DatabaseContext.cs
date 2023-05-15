@@ -10,10 +10,32 @@ namespace Data.Access
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<Observation> Observation { get; set; }
-        public DbSet<Channel> Channel { get; set; }
-        public DbSet<Series> Series { get; set; }
-        public string DbPath { get; }
+        public DbSet<Container> Container
+        {
+            get; set;
+        }
+        public DbSet<Source> Source
+        {
+            get;
+            set;
+        }
+        public DbSet<Observation> Observation
+        {
+            get;
+            set;
+        }
+        public DbSet<Channel> Channel
+        {
+            get; set;
+        }
+        public DbSet<Series> Series
+        {
+            get; set;
+        }
+        public string DbPath
+        {
+            get;
+        }
 
         public DatabaseContext()
         {

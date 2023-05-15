@@ -9,6 +9,13 @@ namespace Data.Models
     public class Channel
     {
         public int Id { get; set; }
+        
+        //RELATIONSHIP
         public List<Series> Series { get; set; }
+        public int ObservationId
+        {
+            get;
+            set;
+        }
     }
 }
