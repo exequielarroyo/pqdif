@@ -14,6 +14,8 @@ using WinUIEx;
 using Windows.Networking.Connectivity;
 using Data.Models;
 using System.Linq;
+using System.Threading.Tasks;
+using WinUI.Views;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -44,7 +46,7 @@ public sealed partial class MainWindow : WindowEx
 
     private DatabaseContext SQLite;
     private DatabaseContext MySQL;
-    private async void NetworkInformation_NetworkStatusChanged(object sender)
+    private void NetworkInformation_NetworkStatusChanged(object sender)
     {
         DispatcherQueue.TryEnqueue(async () =>
         {
@@ -212,6 +214,11 @@ public sealed partial class MainWindow : WindowEx
                 to = typeof(BlankPage2);
                 navigationView.Header = "Working with XML";
                 navigationView.PaneTitle = "Working with XML";
+                break;
+            case "Preview":
+                to = typeof(PreviewPage);
+                navigationView.Header = "Series Preview";
+                navigationView.PaneTitle = "Preview";
                 break;
             default:
                 break;

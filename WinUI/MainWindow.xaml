@@ -74,7 +74,7 @@
                 <!--<NavigationViewItem Content="Order History" Tag="SamplePage3" Icon="Tag" />-->
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <!--<NavigationViewItem Content="Account" Tag="SamplePage4" Icon="Contact" />-->
+                <NavigationViewItem Content="Preview" Tag="Preview" Icon="Contact" />
                 <!--<NavigationViewItem Content="Your Cart" Tag="SamplePage5" Icon="Shop" />-->
                 <!--<NavigationViewItem Content="Help" Tag="SamplePage5" Icon="Help" />-->
             </NavigationView.FooterMenuItems>

@@ -14,6 +14,7 @@
   <ItemGroup>
     <None Remove="BlankPage1.xaml" />
     <None Remove="BlankPage2.xaml" />
+    <None Remove="Views\PreviewPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
     <PackageReference Include="Gemstone.Data" Version="1.0.87" />
     <PackageReference Include="Gemstone.PQDIF" Version="1.0.87" />
     <PackageReference Include="H.OxyPlot.WinUI" Version="0.9.30" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WinUI" Version="2.0.0-beta.710" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
@@ -64,6 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="BlankPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\PreviewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
