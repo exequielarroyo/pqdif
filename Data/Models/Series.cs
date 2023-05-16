@@ -20,15 +20,15 @@ namespace Data.Models
         }
 
         //RELATIONSHIPS
-        //public int ChannelId
-        //{
-        //    get;
-        //    set;
-        //}
-        //public Channel Channel
-        //{
-        //    get;
-        //    set;
-        //}
+        public int ChannelId
+        {
+            get;
+            set;
+        }
+        public Channel Channel
+        {
+            get;
+            set;
+        }
     }
 }

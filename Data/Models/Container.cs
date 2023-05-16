@@ -29,8 +29,6 @@ public class Container
         get;
         set;
     }
-
-    [DefaultValue(0)]
     public bool IsSync
     {
         get;
