@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -15,6 +16,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinUI.ViewModels;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,8 +27,13 @@ namespace WinUI.Views;
 /// </summary>
 public sealed partial class PreviewPage : Page
 {
+    public PreviewViewModel ViewModel
+    {
+        get;
+    }
     public PreviewPage()
     {
+        ViewModel = new();
         this.InitializeComponent();
     }
 }

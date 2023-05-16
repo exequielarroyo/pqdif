@@ -70,9 +70,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Views\PreviewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
