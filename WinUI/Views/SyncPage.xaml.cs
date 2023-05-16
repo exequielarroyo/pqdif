@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Data.Access;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,8 +14,10 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
@@ -48,6 +51,21 @@ public sealed partial class SyncPage : Page
         {
             StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
             chooseLabel.Text = $"Picked folder: {folder.Path}";
+
+            FileSystemWatcher watcher = new FileSystemWatcher(folder.Path);
+            watcher.Filter = "*.*";
+            watcher.Created += Watcher_Created;
+            watcher.EnableRaisingEvents = true;
         }
+    }
+
+    private void Watcher_Created(object sender, FileSystemEventArgs e)
+    {
+
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            chooseLabel.Text = $"New file: {e.Name}";
+        });
+        
     }
 }
