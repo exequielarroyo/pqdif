@@ -1,0 +1,60 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Page
+    x:Class="WinUI.Views.NavigationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    HighContrastAdjustment="None">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            x:Name="AppTitleBar"
+            Grid.Column="1"
+            Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
+            Margin="48,0,0,0"
+            VerticalAlignment="Top"
+            AutomationProperties.AutomationId="AppTitleBar"
+            Canvas.ZIndex="1"
+            IsHitTestVisible="True">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    x:Name="AppTitle"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Text="PQDIF" />
+            </StackPanel>
+        </Border>
+
+        <NavigationView x:Name="NavigationViewControl"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Canvas.ZIndex="0"
+                        IsTabStop="False"
+                        IsTitleBarAutoPaddingEnabled="True">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="SQLite" Tag="SQLite" Icon="ProtectedDocument" >
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge Value="7"/>
+                    </NavigationViewItem.InfoBadge>
+                </NavigationViewItem>
+                <NavigationViewItem Content="XML" Tag="XML" Icon="Page" />
+                <!--<NavigationViewItem Content="Order History" Tag="SamplePage3" Icon="Tag" />-->
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Preview" Tag="Preview" Icon="Contact" />
+                <NavigationViewItem Content="Sync" Tag="Sync" Icon="Shop" />
+                <!--<NavigationViewItem Content="Help" Tag="SamplePage5" Icon="Help" />-->
+            </NavigationView.FooterMenuItems>
+
+            <Frame x:Name="contentFrame" />
+
+        </NavigationView>
+    </Grid>
+</Page>

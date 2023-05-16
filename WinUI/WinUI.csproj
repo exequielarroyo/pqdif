@@ -14,6 +14,8 @@
   <ItemGroup>
     <None Remove="BlankPage1.xaml" />
     <None Remove="BlankPage2.xaml" />
+    <None Remove="BlankWindow1.xaml" />
+    <None Remove="Views\NavigationPage.xaml" />
     <None Remove="Views\PreviewPage.xaml" />
     <None Remove="Views\SyncPage.xaml" />
   </ItemGroup>
@@ -29,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
     <PackageReference Include="Gemstone.Data" Version="1.0.87" />
     <PackageReference Include="Gemstone.PQDIF" Version="1.0.87" />
     <PackageReference Include="H.OxyPlot.WinUI" Version="0.9.30" />
@@ -59,6 +62,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\NavigationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BlankWindow1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\SyncPage.xaml">
