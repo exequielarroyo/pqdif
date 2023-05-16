@@ -220,6 +220,11 @@ public sealed partial class MainWindow : WindowEx
                 navigationView.Header = "Series Preview";
                 navigationView.PaneTitle = "Preview";
                 break;
+            case "Sync":
+                to = typeof(SyncPage);
+                navigationView.Header = "Open Folder to Watch";
+                navigationView.PaneTitle = "Watch";
+                break;
             default:
                 break;
         }

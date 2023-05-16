@@ -15,6 +15,7 @@
     <None Remove="BlankPage1.xaml" />
     <None Remove="BlankPage2.xaml" />
     <None Remove="Views\PreviewPage.xaml" />
+    <None Remove="Views\SyncPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\SyncPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="BlankPage2.xaml">

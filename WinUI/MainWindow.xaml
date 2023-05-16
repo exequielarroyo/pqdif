@@ -75,7 +75,7 @@
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="Preview" Tag="Preview" Icon="Contact" />
-                <!--<NavigationViewItem Content="Your Cart" Tag="SamplePage5" Icon="Shop" />-->
+                <NavigationViewItem Content="Sync" Tag="Sync" Icon="Shop" />
                 <!--<NavigationViewItem Content="Help" Tag="SamplePage5" Icon="Help" />-->
             </NavigationView.FooterMenuItems>
 
