@@ -8,8 +8,32 @@
     xmlns:local="using:WinUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:tb="using:H.NotifyIcon">
+
     <Grid>
+        <tb:TaskbarIcon
+            x:Name="TrayIcon"
+            ToolTipText="PQDIF"
+            ContextMenuMode="SecondWindow"
+            IconSource="Assets/Icon1.ico"
+            >
+            <!--<tb:TaskbarIcon.IconSource>
+                <tb:GeneratedIconSource
+            Text="❤️"
+            Foreground="Red"
+            />
+            </tb:TaskbarIcon.IconSource>-->
+            <tb:TaskbarIcon.ContextFlyout>
+                <MenuFlyout AreOpenCloseAnimationsEnabled="False">
+                    <MenuFlyoutItem Text="Watchingawddddddddddddddddd" />
+                    <MenuFlyoutItem Text="Show/Hide Window" />
+                    <MenuFlyoutSeparator />
+                    <MenuFlyoutItem  Text="Exit" />
+                </MenuFlyout>
+            </tb:TaskbarIcon.ContextFlyout>
+        </tb:TaskbarIcon>
+
         <Border
             Canvas.ZIndex="0"
             IsHitTestVisible="False">
@@ -79,4 +103,5 @@
             <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated" Padding="55,10,0,0"/>
         </NavigationView>
     </Grid>
+
 </Window>
