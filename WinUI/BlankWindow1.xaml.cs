@@ -16,11 +16,9 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using WinRT;
 using System.Runtime.InteropServices; // For DllImport
 using WinRT; // required to support Window.As<ICompositionSupportsSystemBackdrop>()
 using WinUI.Views;
-using WinUIEx;
 using Windows.UI.Notifications;
 using Windows.ApplicationModel;
 using Windows.Storage;

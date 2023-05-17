@@ -10,7 +10,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
-using WinUIEx;
 using Windows.Networking.Connectivity;
 using Data.Models;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace WinUI;
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class MainWindow : WindowEx
+public sealed partial class MainWindow : Window
 {
     public MainWindow()
     {
@@ -130,7 +129,7 @@ public sealed partial class MainWindow : WindowEx
         //textBox.Text = blogs.First().Url;
     }
 
-    private async void get_PQDIF_Data()
+    private void get_PQDIF_Data()
     {
         //string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         //string path = Path.Combine(documents, "example-pqdif-native/example 01.pqd");
@@ -163,8 +162,8 @@ public sealed partial class MainWindow : WindowEx
 
     private void save_To_XML()
     {
-        string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string path = Path.Combine(documents, @"example-pqdif-native\sample.xml");
+        //var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //var path = Path.Combine(documents, @"example-pqdif-native\sample.xml");
 
         XmlDocument xmlDocument = new XmlDocument();
         //xmlDocument.Load(path);
@@ -190,7 +189,7 @@ public sealed partial class MainWindow : WindowEx
 
     private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
     {
-        var tag = sender;
+        //var tag = sender;
         //Type _page = null;
         //if (e.SelectedItemContainer != null)
         //{
