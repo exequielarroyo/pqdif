@@ -1,13 +1,17 @@
 <!-- Copyright (c) Microsoft Corporation and Contributors. -->
 <!-- Licensed under the MIT License. -->
 
-<Window
+<windowex:WindowEx
     x:Class="WinUI.BlankWindow1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    >
-
-    <Grid>
-        
-    </Grid>
-</Window>
+    xmlns:local="using:WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:windowex="using:WinUIEx"
+    PersistenceId="BlankWindow1"
+    mc:Ignorable="d">
+    <windowex:WindowEx.Backdrop>
+        <windowex:MicaSystemBackdrop/>
+    </windowex:WindowEx.Backdrop>
+</windowex:WindowEx>

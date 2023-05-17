@@ -39,8 +39,9 @@ public sealed partial class SyncPage : Page
     private async void chooseButton_Click(object sender, RoutedEventArgs e)
     {
         FolderPicker folderPicker = new FolderPicker();
-        
-        var window = (Application.Current as App)?.m_window as MainWindow;
+
+        var window = App.Window;
+        //var window = (Application.Current as App)?.m_window as MainWindow;
         var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
 
         WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hWnd);

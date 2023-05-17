@@ -20,6 +20,7 @@ using WinRT;
 using System.Runtime.InteropServices; // For DllImport
 using WinRT; // required to support Window.As<ICompositionSupportsSystemBackdrop>()
 using WinUI.Views;
+using WinUIEx;
 
 
 
@@ -31,14 +32,13 @@ namespace WinUI;
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class BlankWindow1 : Window
+public sealed partial class BlankWindow1 : WindowEx
 {
     public BlankWindow1()
     {
         this.InitializeComponent();
-        this.TrySetMicaBackdrop();
-        ExtendsContentIntoTitleBar = true;
-        Content = new NavigationPage(this);
+        Content = null;
+        Title = "PQDIF";
     }
 
     WindowsSystemDispatcherQueueHelper m_wsdqHelper; // See separate sample below for implementation
