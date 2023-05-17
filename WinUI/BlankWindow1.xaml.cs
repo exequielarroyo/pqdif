@@ -46,7 +46,7 @@ public sealed partial class BlankWindow1 : Window
                    null,
                    new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo()
                    );
-        //TaskBarIcon = Icon.FromFile("Assets/Icon.ico");
+        //TaskbarIcon = Icon.FromFile("Assets/Icon.ico");
     }
 
     public string GetAppTitleFromSystem()

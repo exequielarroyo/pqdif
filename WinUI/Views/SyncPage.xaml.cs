@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Data.Access;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -14,6 +15,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.Win32;
+using Microsoft.Windows.AppLifecycle;
 using MySqlX.XDevAPI;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -58,8 +61,21 @@ public sealed partial class SyncPage : Page
             watcher.Created += Watcher_Created;
             watcher.EnableRaisingEvents = true;
         }
+
+        await SaveReg();
     }
 
+    private async Task SaveReg()
+    {
+        using RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+        if (registryKey != null)
+        {
+            dialog.Content = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            await dialog.ShowAsync();
+        }
+        registryKey.SetValue("Winui", $"{System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName}", RegistryValueKind.String);
+        registryKey.Close();
+    }
     private void Watcher_Created(object sender, FileSystemEventArgs e)
     {
 

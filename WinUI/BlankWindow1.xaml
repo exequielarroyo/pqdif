@@ -10,11 +10,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:tb="using:H.NotifyIcon">
+    
 
     <Grid>
+        <TextBlock Text="{StaticResource appName}"/>
+        
         <tb:TaskbarIcon
             x:Name="TrayIcon"
-            ToolTipText="PQDIF"
+            ToolTipText="{StaticResource appName}"
+            TrayToolTip="{StaticResource appName}"
             ContextMenuMode="SecondWindow"
             IconSource="Assets/Icon1.ico"
             >
@@ -58,7 +62,7 @@
                     Grid.Column="1"
                     VerticalAlignment="Center"
                     Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="{x:Bind GetAppTitleFromSystem()}"/>
+                    Text="{StaticResource appName}"/>
             </Grid>
         </Border>
 

@@ -14,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
             <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
+            <x:String x:Key="appName">PQDIF</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
