@@ -36,40 +36,31 @@
             </tb:TaskbarIcon.ContextFlyout>
         </tb:TaskbarIcon>
 
-        <Border
-            Canvas.ZIndex="0"
-            IsHitTestVisible="False">
-            <Grid
-                Height="48"
-                Margin="48,0,0,0"
-                VerticalAlignment="Top"
-                Padding="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Image
-                    x:Name="AppFontIcon"
-                    Width="16"
-                    Height="16"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Source="/Assets/Square44x44Logo.png" />
-                <TextBlock
-                    Margin="12,0,0,0"
-                    Grid.Column="1"
-                    VerticalAlignment="Center"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="{StaticResource appName}"/>
-            </Grid>
-        </Border>
+
+        <Grid x:Name="AppTitleBar"
+              Canvas.ZIndex="1"
+              Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
+              IsHitTestVisible="True"
+              VerticalAlignment="Top">
+            <Image Source="/Assets/Icon1.ico"
+                   HorizontalAlignment="Left"
+                   Width="16"
+                   Height="16" />
+            <TextBlock x:Name="AppTitleBarText"
+                       VerticalAlignment="Center"
+                       TextWrapping="NoWrap"
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Text="PQDIF"
+                       Margin="28,0,0,0"/>
+        </Grid>
 
         <NavigationView
             x:Name="NavigationViewControl"
             IsTitleBarAutoPaddingEnabled="False"
-            AlwaysShowHeader="True"
+            AlwaysShowHeader="True" 
             Header="Default Header"
             IsTabStop="False" 
+            DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             BackRequested="NavigationViewControl_BackRequested" 
             ItemInvoked="NavigationViewControl_ItemInvoked"
             IsSettingsVisible="False">
