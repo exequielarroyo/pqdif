@@ -114,7 +114,7 @@ public sealed partial class BlankPage1 : Page
 
         // Retrieve the window handle (HWND) of the current WinUI 3 window.
         //var window = App.Window;
-        var window = (Application.Current as App)?.m_window as MainWindow;
+        var window = (Application.Current as App)?.m_window as OldWindow;
         var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
 
         // Initialize the file picker with the window handle (HWND).

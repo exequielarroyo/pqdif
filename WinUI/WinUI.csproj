@@ -31,7 +31,7 @@
   <ItemGroup>
     <None Remove="BlankPage1.xaml" />
     <None Remove="BlankPage2.xaml" />
-    <None Remove="BlankWindow1.xaml" />
+    <None Remove="BlankWindow.xaml" />
     <None Remove="Views\NavigationPage.xaml" />
     <None Remove="Views\PreviewPage.xaml" />
     <None Remove="Views\SyncPage.xaml" />
@@ -64,7 +64,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="BlankWindow1.xaml">
+    <Page Update="BlankWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
