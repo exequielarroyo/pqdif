@@ -9,8 +9,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:tb="using:H.NotifyIcon">
-    
+    xmlns:tb="using:H.NotifyIcon" 
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
+
 
     <Grid>
         <tb:TaskbarIcon
@@ -85,19 +86,71 @@
                 </DataTemplate>
             </NavigationView.HeaderTemplate>
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Home" Content="Sync" Tag="WinUI.Views.SyncPage" />
-                <NavigationViewItem Icon="Home" Content="Config" SelectsOnInvoked="False">
+                <NavigationViewItem Icon="SyncFolder" Content="Sync" Tag="WinUI.Views.SyncPage" />
+                <NavigationViewItem Content="Preview" Tag="WinUI.Views.PreviewPage">
+                    <!--<NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE9D2;" />
+                    </NavigationViewItem.Icon>-->
+                    <NavigationViewItem.Icon>
+                        <AnimatedIcon>
+                            <AnimatedIcon.Source>
+                                <animatedvisuals:AnimatedFindVisualSource/>
+                            </AnimatedIcon.Source>
+                            <AnimatedIcon.FallbackIconSource>
+                                <SymbolIconSource Symbol="Setting"/>
+                            </AnimatedIcon.FallbackIconSource>
+                        </AnimatedIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                
+                <NavigationViewItem Icon="Globe" Content="Module" SelectsOnInvoked="False">
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Icon="Save" Content="Menu Item2" Tag="SamplePage2" />
-                        <NavigationViewItem Icon="Refresh" Content="Menu Item3" Tag="SamplePage3" />
-                        <NavigationViewItem Icon="Download" Content="Menu Item4" Tag="SamplePage4" />
+                        <NavigationViewItem Icon="Save" Content="Menu Item2" />
+                        <NavigationViewItem Icon="Refresh" Content="Menu Item3" />
+                        <NavigationViewItem Icon="Download" Content="Menu Item4" />
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
-            
+                
+                <NavigationViewItem Content="Module">
+                    <NavigationViewItem.Icon>
+                        <AnimatedIcon>
+                            <AnimatedIcon.Source>
+                                <animatedvisuals:AnimatedChevronDownSmallVisualSource/>
+                            </AnimatedIcon.Source>
+                            <AnimatedIcon.FallbackIconSource>
+                                <SymbolIconSource Symbol="Setting"/>
+                            </AnimatedIcon.FallbackIconSource>
+                        </AnimatedIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Icon="Home" Content="Config" SelectsOnInvoked="False"/>
-                <NavigationViewItem Icon="Home" Content="Config" SelectsOnInvoked="False"/>
+                <NavigationViewItem Content="Settings" SelectsOnInvoked="False">
+                    <NavigationViewItem.Icon>
+                        <AnimatedIcon>
+                            <AnimatedIcon.Source>
+                                <animatedvisuals:AnimatedSettingsVisualSource/>
+                            </AnimatedIcon.Source>
+                            <AnimatedIcon.FallbackIconSource>
+                                <SymbolIconSource Symbol="Setting"/>
+                            </AnimatedIcon.FallbackIconSource>
+                        </AnimatedIcon>
+                    </NavigationViewItem.Icon>
+
+                </NavigationViewItem>
+                <NavigationViewItem SelectsOnInvoked="False">
+                    <!--<NavigationViewItem.Icon>
+                        <ImageIcon Source="{x:Bind ProfileImage}"/>
+                    </NavigationViewItem.Icon>-->
+                    <NavigationViewItem.Content>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                            <PersonPicture x:Name="personPicture" ProfilePicture="{x:Bind ProfileImage}" Width="24" Height="24" Margin="0,0,16,0" />
+                            <TextBlock Text="Profile" Margin="0,2,0,0"/>
+                        </StackPanel>
+                    </NavigationViewItem.Content>
+                </NavigationViewItem>
+
             </NavigationView.FooterMenuItems>
             <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated" Padding="55,10,0,0"/>
         </NavigationView>

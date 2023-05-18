@@ -22,6 +22,7 @@ using WinUI.Views;
 using Windows.UI.Notifications;
 using Windows.ApplicationModel;
 using Windows.Storage;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 
 
@@ -48,6 +49,8 @@ public sealed partial class BlankWindow : Window
                    );
         //TaskbarIcon = Icon.FromFile("Assets/Icon.ico");
     }
+
+    public string ProfileImage = "Assets/IMG-2276.png";
 
     public string GetAppTitleFromSystem()
     {
@@ -81,7 +84,7 @@ public sealed partial class BlankWindow : Window
     {
         NavigationViewControl.IsBackEnabled = ContentFrame.CanGoBack;
 
-        if (ContentFrame.SourcePageType == typeof(Views.PreviewPage))
+        if (ContentFrame.SourcePageType == typeof(Views.NavigationPage))
         {
             // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
             NavigationViewControl.SelectedItem = (NavigationViewItem)NavigationViewControl.SettingsItem;
@@ -105,5 +108,13 @@ public sealed partial class BlankWindow : Window
             Right = AppTitleBar.Margin.Right,
             Bottom = AppTitleBar.Margin.Bottom
         };
+
+        //personPicture.Margin = new Thickness()
+        //{
+        //    Left = (sender.DisplayMode == NavigationViewDisplayMode.Minimal ? -8 : 0),
+        //    Top = personPicture.Margin.Top,
+        //    Right = personPicture.Margin.Right,
+        //    Bottom = personPicture.Margin.Bottom
+        //};
     }
 }
