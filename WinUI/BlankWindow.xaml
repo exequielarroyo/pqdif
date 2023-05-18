@@ -86,11 +86,10 @@
                 </DataTemplate>
             </NavigationView.HeaderTemplate>
             <NavigationView.MenuItems>
+                
                 <NavigationViewItem Icon="SyncFolder" Content="Sync" Tag="WinUI.Views.SyncPage" />
+                
                 <NavigationViewItem Content="Preview" Tag="WinUI.Views.PreviewPage">
-                    <!--<NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE9D2;" />
-                    </NavigationViewItem.Icon>-->
                     <NavigationViewItem.Icon>
                         <AnimatedIcon>
                             <AnimatedIcon.Source>
@@ -102,16 +101,8 @@
                         </AnimatedIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                
-                <NavigationViewItem Icon="Globe" Content="Module" SelectsOnInvoked="False">
-                    <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Icon="Save" Content="Menu Item2" />
-                        <NavigationViewItem Icon="Refresh" Content="Menu Item3" />
-                        <NavigationViewItem Icon="Download" Content="Menu Item4" />
-                    </NavigationViewItem.MenuItems>
-                </NavigationViewItem>
-                
-                <NavigationViewItem Content="Module">
+
+                <NavigationViewItem Content="Save Data" Tag="WinUI.Views.SavePage">
                     <NavigationViewItem.Icon>
                         <AnimatedIcon>
                             <AnimatedIcon.Source>
@@ -123,8 +114,17 @@
                         </AnimatedIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                
+                <NavigationViewItem Icon="Globe" Content="Module">
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Icon="Save" Content="Save Data" Tag="WinUI.Views.SavePage"/>
+                        <NavigationViewItem Icon="Refresh" Content="Menu Item3" />
+                        <NavigationViewItem Icon="Download" Content="Menu Item4" />
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
 
             </NavigationView.MenuItems>
+            
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="Settings" SelectsOnInvoked="False">
                     <NavigationViewItem.Icon>

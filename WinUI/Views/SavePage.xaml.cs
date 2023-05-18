@@ -29,14 +29,14 @@ using Windows.Storage.Pickers;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace WinUI;
+namespace WinUI.Views;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class BlankPage1 : Page
+public sealed partial class SavePage : Page
 {
-    public BlankPage1()
+    public SavePage()
     {
         this.InitializeComponent();
         NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
@@ -45,13 +45,14 @@ public sealed partial class BlankPage1 : Page
     private NetworkConnectivityLevel hasInternet;
     private void NetworkInformation_NetworkStatusChanged(object sender) 
     {
-        DispatcherQueue.TryEnqueue(() =>
+        DispatcherQueue.TryEnqueue(async () =>
         {
             ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
             hasInternet = profile?.GetNetworkConnectivityLevel() ?? NetworkConnectivityLevel.None;
             if (hasInternet == NetworkConnectivityLevel.InternetAccess)
             {
                 MySQL = new MySQLContext();
+                await dialog.ShowAsync();
             }
             else
             {
@@ -114,7 +115,7 @@ public sealed partial class BlankPage1 : Page
 
         // Retrieve the window handle (HWND) of the current WinUI 3 window.
         //var window = App.Window;
-        var window = (Application.Current as App)?.m_window as OldWindow;
+        var window = (Application.Current as App)?.m_window as BlankWindow;
         var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
 
         // Initialize the file picker with the window handle (HWND).

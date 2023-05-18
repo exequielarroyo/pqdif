@@ -205,12 +205,12 @@ public sealed partial class OldWindow : Window
         switch (args.InvokedItem)
         {
             case "SQLite":
-                to = typeof(BlankPage1);
+                to = typeof(SavePage);
                 navigationView.Header = "Working with SQLite";
                 navigationView.PaneTitle = "Working with SQLite";
                 break;
             case "XML":
-                to = typeof(BlankPage2);
+                to = typeof(SavePage);
                 navigationView.Header = "Working with XML";
                 navigationView.PaneTitle = "Working with XML";
                 break;
@@ -233,6 +233,6 @@ public sealed partial class OldWindow : Window
 
     private void navigationView_Loaded(object sender, RoutedEventArgs e)
     {
-        contentFrame.Navigate(typeof(BlankPage1));
+        contentFrame.Navigate(typeof(SavePage));
     }
 }

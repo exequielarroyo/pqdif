@@ -30,9 +30,8 @@
     <Content Remove="Assets\IMG-2276.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="BlankPage1.xaml" />
-    <None Remove="BlankPage2.xaml" />
     <None Remove="BlankWindow.xaml" />
+    <None Remove="SavePage.xaml" />
     <None Remove="Views\NavigationPage.xaml" />
     <None Remove="Views\PreviewPage.xaml" />
     <None Remove="Views\SyncPage.xaml" />
@@ -75,12 +74,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="BlankPage2.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="BlankPage1.xaml">
+    <Page Update="SavePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
