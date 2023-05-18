@@ -14,6 +14,16 @@
 
 
     <Grid>
+        <ContentDialog
+                       Title="Sync locally saved data?" 
+                       x:Name="dialog2" 
+                       CloseButtonText="Close"
+                       PrimaryButtonText="Sync"
+                       DefaultButton="Primary"
+                       Style="{ThemeResource DefaultContentDialogStyle}">
+            <ProgressRing x:Name="dialogLoading" IsActive="False" />
+        </ContentDialog>
+        
         <tb:TaskbarIcon
             x:Name="TrayIcon"
             ToolTipText="{StaticResource appName}"

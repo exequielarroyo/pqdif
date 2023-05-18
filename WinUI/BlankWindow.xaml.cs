@@ -23,6 +23,9 @@ using Windows.UI.Notifications;
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.Networking.Connectivity;
+using Data.Access;
+using MySqlX.XDevAPI;
 
 
 
@@ -48,6 +51,49 @@ public sealed partial class BlankWindow : Window
                    new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo()
                    );
         //TaskbarIcon = Icon.FromFile("Assets/Icon.ico");
+
+        NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
+    }
+
+    private DatabaseContext SQLite;
+    private DatabaseContext MySQL;
+    private async void NetworkInformation_NetworkStatusChanged(object sender)
+    {
+        DispatcherQueue.TryEnqueue(async () =>
+        {
+            ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+            var level = profile?.GetNetworkConnectivityLevel() ?? NetworkConnectivityLevel.None;
+            if (level == NetworkConnectivityLevel.InternetAccess)
+            {
+                AppTitleBarText.Text = "Internet Connected";
+                ContentDialogResult result = await dialog2.ShowAsync();
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    MySQL = new MySQLContext();
+                    SQLite = new SQLiteContext();
+
+                    dialogLoading.IsActive = true;
+
+                    var seriesToSync = from series in SQLite.Series.ToList()
+                                       where series.IsSync == false
+                    select series;
+
+
+                    MySQL.Series.AddRange(seriesToSync);
+                    MySQL.SaveChanges();
+
+                    seriesToSync.ToList().ForEach(s => s.IsSync = true);
+                    SQLite.SaveChanges();
+
+                    dialogLoading.IsActive = false;
+                }
+            }
+            else
+            {
+                AppTitleBarText.Text = "No Internet Connection";
+            }
+        });
     }
 
     public string ProfileImage = "Assets/IMG-2276.png";

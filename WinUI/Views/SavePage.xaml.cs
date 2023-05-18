@@ -52,7 +52,6 @@ public sealed partial class SavePage : Page
             if (hasInternet == NetworkConnectivityLevel.InternetAccess)
             {
                 MySQL = new MySQLContext();
-                await dialog.ShowAsync();
             }
             else
             {
