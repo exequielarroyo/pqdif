@@ -42,18 +42,8 @@ public sealed partial class BlankWindow : Window
     public BlankWindow()
     {
         this.InitializeComponent();
-       
-
-        NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.OfType<NavigationViewItem>().First();
-        ContentFrame.Navigate(
-                   typeof(Views.SyncPage),
-                   null,
-                   new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo()
-                   );
-        //TaskbarIcon = Icon.FromFile("Assets/Icon.ico");
-
+        Content = new NavigationPage();
         NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
-        //SubMenu.CornerRadius = new CornerRadius(6,6,6,6);
     }
 
     private DatabaseContext SQLite;
@@ -66,7 +56,7 @@ public sealed partial class BlankWindow : Window
             var level = profile?.GetNetworkConnectivityLevel() ?? NetworkConnectivityLevel.None;
             if (level == NetworkConnectivityLevel.InternetAccess)
             {
-                AppTitleBarText.Text = "Internet Connected";
+                //AppTitleBarText.Text = "Internet Connected";
                 ContentDialogResult result = await dialog2.ShowAsync();
 
                 if (result == ContentDialogResult.Primary)
@@ -92,83 +82,13 @@ public sealed partial class BlankWindow : Window
             }
             else
             {
-                AppTitleBarText.Text = "No Internet Connection";
+                //AppTitleBarText.Text = "No Internet Connection";
             }
         });
     }
 
-    public string ProfileImage = "Assets/IMG-2276.png";
-
     public string GetAppTitleFromSystem()
     {
         return Windows.ApplicationModel.Package.Current.DisplayName;
-    }
-
-    private void NavigationViewControl_ItemInvoked(NavigationView sender,
-                  NavigationViewItemInvokedEventArgs args)
-    {
-        if (args.IsSettingsInvoked == true)
-        {
-            ContentFrame.Navigate(typeof(Views.PreviewPage), null, args.RecommendedNavigationTransitionInfo);
-        }
-        else if (args.InvokedItemContainer != null && (args.InvokedItemContainer.Tag != null))
-        {
-            Type newPage = Type.GetType(args.InvokedItemContainer.Tag.ToString());
-            ContentFrame.Navigate(
-                   newPage,
-                   null,
-                   args.RecommendedNavigationTransitionInfo
-                   );
-        }
-    }
-
-    private void NavigationViewControl_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
-    {
-        if (ContentFrame.CanGoBack) ContentFrame.GoBack();
-    }
-
-    private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
-    {
-        NavigationViewControl.IsBackEnabled = ContentFrame.CanGoBack;
-
-        if (ContentFrame.SourcePageType == typeof(Views.NavigationPage))
-        {
-            // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
-            NavigationViewControl.SelectedItem = (NavigationViewItem)NavigationViewControl.SettingsItem;
-        }
-        else if (ContentFrame.SourcePageType != null)
-        {
-            NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.Concat(SecondNav.MenuItems)
-                .OfType<NavigationViewItem>()
-                .First(n =>
-                {
-                    if (n.Tag != null)
-                    {
-                        return n.Tag.Equals(ContentFrame.SourcePageType.FullName.ToString());
-                    }
-                    return false;
-                });
-        }
-
-        NavigationViewControl.Header = ((NavigationViewItem)NavigationViewControl.SelectedItem)?.Content?.ToString();
-    }
-
-    private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
-    {
-        AppTitleBar.Margin = new Thickness()
-        {
-            Left = sender.CompactPaneLength * (sender.DisplayMode == NavigationViewDisplayMode.Minimal ? 2 : 1),
-            Top = AppTitleBar.Margin.Top,
-            Right = AppTitleBar.Margin.Right,
-            Bottom = AppTitleBar.Margin.Bottom
-        };
-
-        //personPicture.Margin = new Thickness()
-        //{
-        //    Left = (sender.DisplayMode == NavigationViewDisplayMode.Minimal ? -8 : 0),
-        //    Top = personPicture.Margin.Top,
-        //    Right = personPicture.Margin.Right,
-        //    Bottom = personPicture.Margin.Bottom
-        //};
     }
 }
