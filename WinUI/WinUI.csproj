@@ -86,11 +86,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder\" />
-    <Folder Include="Services\" />
-    <Folder Include="Themes\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="Assets\IMG-2276.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

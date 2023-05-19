@@ -14,31 +14,18 @@ using SkiaSharp;
 namespace WinUI.ViewModels;
 public class PreviewViewModel
 {
-    
     public ISeries[] Series
     {
-        get; set;
-    } =
-    {
-        new LineSeries<ObservablePoint>
-        {
-            Values = new ObservablePoint[]
-            {
-                new ObservablePoint(0, 4),
-                new ObservablePoint(1, 3),
-                new ObservablePoint(3, 8),
-                new ObservablePoint(18, 6),
-                new ObservablePoint(20, 12)
-            }
-        }
-    };
+        get;
+        set;
+    }
 
     SQLiteContext db;
 
-    public ISeries[] GetSeries()
+    public PreviewViewModel()
     {
         db = new SQLiteContext();
-        
+
         var xSeries = db.Series.ToList()[0].Values.Trim('[', ']').Split(',');
         var ySeries = db.Series.ToList()[1].Values.Trim('[', ']').Split(',');
         var xSeries2 = db.Series.ToList()[2].Values.Trim('[', ']').Split(',');
@@ -80,8 +67,6 @@ public class PreviewViewModel
         this.Series = new ISeries[2];
         this.Series[0] = lineSeries;
         this.Series[1] = lineSeries2;
-
-        return this.Series;
     }
 
     public LabelVisual Title
