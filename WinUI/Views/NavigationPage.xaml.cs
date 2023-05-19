@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using H.NotifyIcon;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -15,6 +16,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,7 +37,37 @@ public sealed partial class NavigationPage : Page
                    null,
                    new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo()
                    );
+
+        Command.ExecuteRequested += Command_ExecuteRequested;
+        ShowHide.ExecuteRequested += ShowHide_ExecuteRequested;
     }
+
+    private void ShowHide_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
+    {
+        var window = (Application.Current as App).m_window;
+        if (window.AppWindow.IsVisible)
+        {
+            window.Hide();
+        }
+        else
+        {
+            window.Activate();
+        }
+    }
+
+    private void Command_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
+    {
+        App.Current.Exit();
+    }
+
+    public XamlUICommand Command
+    {
+        get; set;
+    } = new XamlUICommand();
+    public XamlUICommand ShowHide
+    {
+        get; set;
+    } = new XamlUICommand();
 
     public string ProfileImage = "./../Assets/IMG-2276.png";
 
