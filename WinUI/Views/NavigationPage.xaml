@@ -12,7 +12,8 @@
             x:Name="TrayIcon"
             ToolTipText="{StaticResource appName}"
             TrayToolTip="{StaticResource appName}"
-            ContextMenuMode="SecondWindow"
+            ContextMenuMode="PopupMenu"
+            LeftClickCommand="{x:Bind Click}"
             IconSource="./../Assets/Icon1.ico"
             >
             <tb:TaskbarIcon.ContextFlyout>

@@ -40,6 +40,13 @@ public sealed partial class NavigationPage : Page
 
         Command.ExecuteRequested += Command_ExecuteRequested;
         ShowHide.ExecuteRequested += ShowHide_ExecuteRequested;
+        Click.ExecuteRequested += Click_ExecuteRequested;
+    }
+
+    private void Click_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
+    {
+        var window = (Application.Current as App).m_window;
+        window.Activate();
     }
 
     private void ShowHide_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
@@ -67,6 +74,11 @@ public sealed partial class NavigationPage : Page
     public XamlUICommand ShowHide
     {
         get; set;
+    } = new XamlUICommand();
+    public XamlUICommand Click
+    {
+        get;
+        set;
     } = new XamlUICommand();
 
     public string ProfileImage = "./../Assets/IMG-2276.png";
