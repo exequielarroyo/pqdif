@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -12,8 +14,10 @@ public partial class App : Application
     public App()
     {
         this.InitializeComponent();
+        //serviceProvider = new ServiceProvider
     }
 
+    //IServiceProvider serviceProvider;
     private void SizeChanged(object sender, WindowSizeChangedEventArgs args)
     {
         //Update the title bar draggable region. We need to indent from the left both for the nav back button and to avoid the system menu

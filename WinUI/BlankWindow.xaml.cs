@@ -53,6 +53,7 @@ public sealed partial class BlankWindow : Window
         //TaskbarIcon = Icon.FromFile("Assets/Icon.ico");
 
         NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
+        //SubMenu.CornerRadius = new CornerRadius(6,6,6,6);
     }
 
     private DatabaseContext SQLite;
@@ -137,9 +138,16 @@ public sealed partial class BlankWindow : Window
         }
         else if (ContentFrame.SourcePageType != null)
         {
-            NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
+            NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.Concat(SecondNav.MenuItems)
                 .OfType<NavigationViewItem>()
-                .First(n => n.Tag.Equals(ContentFrame.SourcePageType.FullName.ToString()));
+                .First(n =>
+                {
+                    if (n.Tag != null)
+                    {
+                        return n.Tag.Equals(ContentFrame.SourcePageType.FullName.ToString());
+                    }
+                    return false;
+                });
         }
 
         NavigationViewControl.Header = ((NavigationViewItem)NavigationViewControl.SelectedItem)?.Content?.ToString();
