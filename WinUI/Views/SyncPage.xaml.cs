@@ -24,6 +24,9 @@ using Windows.Networking.Connectivity;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
+//using Windows.Storage;
+//using Windows.Storage.AccessCache;
+//using Windows.Storage.Pickers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -53,7 +56,7 @@ public sealed partial class SyncPage : Page
 
         if (folder != null)
         {
-            StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
+            //StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
             chooseLabel.Text = $"Picked folder: {folder.Path}";
 
             FileSystemWatcher watcher = new FileSystemWatcher(folder.Path);
