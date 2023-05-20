@@ -4,7 +4,9 @@
 <Page
     x:Class="WinUI.Views.NavigationPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals" xmlns:tb="using:H.NotifyIcon"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals" 
+    xmlns:tb="using:H.NotifyIcon"
     HighContrastAdjustment="None">
 
     <Grid>
@@ -44,7 +46,7 @@
 
         <NavigationView
             x:Name="NavigationViewControl"
-            IsTitleBarAutoPaddingEnabled="False"
+            IsTitleBarAutoPaddingEnabled="True"
             AlwaysShowHeader="True" 
             Header="Default Header"
             IsTabStop="False" 
@@ -54,7 +56,7 @@
             IsSettingsVisible="False">
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,-10,0,0">
+                    <Grid Margin="-30,-30,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
@@ -64,7 +66,7 @@
                             Height="44"
                             VerticalAlignment="Top">
                             <TextBlock x:Name="title" 
-                                Style="{StaticResource TitleTextBlockStyle}"
+                                Style="{StaticResource DisplayTextBlockStyle}"
                                 FontSize="24"
                                 VerticalAlignment="Center"
                                 Text="{Binding}"/>
@@ -74,7 +76,7 @@
             </NavigationView.HeaderTemplate>
             <NavigationView.MenuItems>
 
-                <NavigationViewItem Icon="SyncFolder" Content="Sync" Tag="WinUI.Views.SyncPage" />
+                <NavigationViewItem Icon="SyncFolder" Content="Chats" Tag="WinUI.Views.SyncPage" />
 
                 <NavigationViewItem Content="Preview" Tag="WinUI.Views.PreviewPage">
                     <NavigationViewItem.Icon>
