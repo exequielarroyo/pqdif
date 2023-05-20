@@ -10,23 +10,51 @@ namespace Data.Models
 {
     public class Observation
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        [Column(TypeName = "tinyint")]
-        public int TriggerMethod { get; set; }
-        public DateTime TriggeredAt { get; set; }
-        public DateTime StartAt { get; set; }
-        public DateTime CreatedAt { get; set; }
-
-        //RELATIONSHIPS
-        public int SourceId
+        public int Id
+        {
+            get; set;
+        }
+        public string Name
+        {
+            get; set;
+        }
+        
+        public DateTime CreateAt
         {
             get;
             set;
         }
+        public DateTime StartAt
+        {
+            get; set;
+        }
+        [Column(TypeName = "tinyint")]
+        public int TriggerMethod
+        {
+            get; set;
+        }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime CreatedAt
+        {
+            get;
+            set;
+        }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime UpdatedAt
+        {
+            get;
+            set;
+        }
+
+        //RELATIONSHIPS
         public List<Channel> Channels
         {
             get;
+        }
+        public int ContainerId
+        {
+            get;
+            set;
         }
         public Container Container
         {

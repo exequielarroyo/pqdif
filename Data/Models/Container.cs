@@ -1,30 +1,28 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Models;
 public class Container
 {
     public int Id
     {
-        get;
-        set;
+        get; set;
     }
     public string FileName
     {
         get;
         set;
     }
-    public string Author
+    public DateTime Creation
     {
         get;
         set;
     }
-    public string Title
+    public int CompressionStyle
     {
         get;
         set;
     }
-    public string Comments
+    public int CompressionAlgorithm
     {
         get;
         set;
@@ -49,6 +47,11 @@ public class Container
 
     //RELATIONSHIPS
     public List<Observation> Observations
+    {
+        get;
+        set;
+    }
+    public Source Source
     {
         get;
         set;

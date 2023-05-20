@@ -64,14 +64,14 @@ public sealed partial class OldWindow : Window
                     dialogLoading.IsActive = true;
 
                     var seriesToSync = from series in SQLite.Series.ToList()
-                    where series.IsSync == false
+                    where series.Channel.Observation.Container.IsSync == false
                     select series;
                     
 
                     MySQL.Series.AddRange(seriesToSync);
                     MySQL.SaveChanges();
 
-                    seriesToSync.ToList().ForEach(s => s.IsSync = true);
+                    seriesToSync.ToList().ForEach(s => s.Channel.Observation.Container.IsSync = true);
                     SQLite.SaveChanges();
 
                     dialogLoading.IsActive = false;

@@ -45,7 +45,7 @@ public sealed partial class SavePage : Page
     private NetworkConnectivityLevel hasInternet;
     private void NetworkInformation_NetworkStatusChanged(object sender) 
     {
-        DispatcherQueue.TryEnqueue(async () =>
+        DispatcherQueue.TryEnqueue(() =>
         {
             ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
             hasInternet = profile?.GetNetworkConnectivityLevel() ?? NetworkConnectivityLevel.None;
@@ -81,8 +81,6 @@ public sealed partial class SavePage : Page
                     {
                         Series newData = new Series()
                         {
-                            Offset = series.SeriesOffset.GetInt4(),
-                            Scale = series.SeriesScale.GetInt4(),
                             Values = JsonSerializer.Serialize(series.OriginalValues),
                         };
                         SQLite.Series.Add(newData);
@@ -90,7 +88,7 @@ public sealed partial class SavePage : Page
                         if (hasInternet == NetworkConnectivityLevel.InternetAccess)
                         {
                             this.MySQL.Series.AddRange(newData);
-                            newData.IsSync = true;
+                            //newData.IsSync = true;
                             MySQL.SaveChanges();
                         }
 

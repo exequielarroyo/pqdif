@@ -27,7 +27,7 @@ public class SQLiteContext : DatabaseContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Series>()
+        modelBuilder.Entity<Container>()
             .Property(c => c.IsSync)
             .HasDefaultValue(false);
     }
