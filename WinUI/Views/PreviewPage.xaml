@@ -16,7 +16,8 @@
         <lvc:CartesianChart
             Series="{x:Bind ViewModel.Series}" 
             Title="{x:Bind ViewModel.Title}"
-            ZoomMode="Both">
+            ZoomMode="Both"
+            XAxes="{x:Bind ViewModel.cartesianAxes}">
         </lvc:CartesianChart>
     </Grid>
 </Page>
