@@ -40,9 +40,9 @@ namespace Data.Migrations.SQLite
                     CreateAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     StartAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     TriggerMethod = table.Column<int>(type: "tinyint", nullable: false),
+                    ContainerId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ContainerId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,9 +65,9 @@ namespace Data.Migrations.SQLite
                     Type = table.Column<string>(type: "TEXT", nullable: false),
                     VendorId = table.Column<string>(type: "TEXT", nullable: false),
                     EquipmentId = table.Column<string>(type: "TEXT", nullable: false),
+                    ContainerId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ContainerId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,9 +89,9 @@ namespace Data.Migrations.SQLite
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     PhaseId = table.Column<int>(type: "INTEGER", nullable: false),
                     MeasuredId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ObservationId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ObservationId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,9 +114,9 @@ namespace Data.Migrations.SQLite
                     CharacteristicId = table.Column<int>(type: "INTEGER", nullable: false),
                     TypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     Values = table.Column<string>(type: "TEXT", nullable: false),
+                    ChannelId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ChannelId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
