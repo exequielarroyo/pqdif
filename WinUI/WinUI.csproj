@@ -20,8 +20,8 @@
 		<AppxBundle>Never</AppxBundle>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<ApplicationIcon>Assets\Icon1.ico</ApplicationIcon>
-		<WindowsPackageType>None</WindowsPackageType>
-		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+		<!--<WindowsPackageType>None</WindowsPackageType>
+		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>-->
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Remove="Assets\BadgeLogo.scale-100.png" />
@@ -98,9 +98,6 @@
 		<Page Update="Views\UserControl1.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</Page>
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Contracts\Services\" />
 	</ItemGroup>
 
 	<!-- 

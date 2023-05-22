@@ -1,14 +1,7 @@
 ﻿using System;
-using Data.Access;
-using Data.Contracts.Services;
-using H.NotifyIcon;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using WinRT;
 
 namespace WinUI;

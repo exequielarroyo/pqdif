@@ -20,7 +20,7 @@ public class PreviewViewModel
         set;
     }
 
-    SQLiteContext db;
+    readonly SQLiteContext db;
 
     public PreviewViewModel()
     {

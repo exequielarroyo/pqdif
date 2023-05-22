@@ -4,6 +4,7 @@
 using Data.Access;
 using Data.Models;
 using Gemstone.PQDIF.Logical;
+using Gemstone.PQDIF.Physical;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -73,23 +74,68 @@ public sealed partial class SavePage : Page
         {
             dialogLoading.IsActive = true;
 
+            var container = new Container()
+            {
+                CompressionAlgorithm = (int)_container.CompressionAlgorithm,
+                CompressionStyle = (int)_container.CompressionStyle,
+                Creation = _container.Creation,
+                FileName = _container.FileName,
+            };
+
+            var source = new Source()
+            {
+                Container = container,
+                ContainerId = container.Id,
+                EquipmentId = _sources[0].EquipmentID.ToString(),
+                Name = _sources[0].DataSourceName,
+                Type =_sources[0].DataSourceTypeID.ToString(),
+                VendorId = _sources[0].VendorID.ToString(),
+            };
+
+            SQLite.Container.Add(container);
+            SQLite.Source.Add(source);
+
             foreach (ObservationRecord observation in Observations)
             {
+                var newObservation = new Observation() { 
+                    Container = container,
+                    ContainerId = container.Id,
+                    Name = observation.Name,
+                    CreateAt = observation.CreateTime,
+                    StartAt = observation.StartTime,
+                    TriggerMethod = (int)observation.TriggerMethod,
+                };
+                SQLite.Observation.Add(newObservation);
+
                 foreach (ChannelInstance channel in observation.ChannelInstances)
                 {
+                    var newChannel = new Channel()
+                    {
+                        MeasuredId = (int)channel.Definition.QuantityMeasured,
+                        Name = channel.Definition.ChannelName,
+                        Observation = newObservation,
+                        ObservationId = newObservation.Id,
+                        PhaseId = (int)channel.Definition.Phase,
+                    };
+                    SQLite.Channel.Add(newChannel);
+
                     foreach (SeriesInstance series in channel.SeriesInstances)
                     {
-                        Series newData = new Series()
-                        {
+                        var newSeries = new Series() { 
+                            Channel = newChannel,
+                            ChannelId = newChannel.Id,
+                            CharacteristicId = 0,
+                            TypeId = 0,
+                            UnitsId = (int)series.Definition.QuantityUnits,
                             Values = JsonSerializer.Serialize(series.OriginalValues),
                         };
-                        SQLite.Series.Add(newData);
+                        SQLite.Series.Add(newSeries);
 
                         if (hasInternet == NetworkConnectivityLevel.InternetAccess)
                         {
-                            this.MySQL.Series.AddRange(newData);
+                            //this.MySQL.Series.AddRange(newData);
                             //newData.IsSync = true;
-                            MySQL.SaveChanges();
+                            //MySQL.SaveChanges();
                         }
 
                         SQLite.SaveChanges();
@@ -101,6 +147,8 @@ public sealed partial class SavePage : Page
     }
 
     private ObservableCollection<ObservationRecord> Observations { get; set; } = new();
+    private ContainerRecord _container;
+    private List<DataSourceRecord> _sources;
 
     private async void PickAFileButton_Click(object sender, RoutedEventArgs e)
     {
@@ -130,6 +178,8 @@ public sealed partial class SavePage : Page
 
             logicalParser = new LogicalParser(file.Path);
             await logicalParser.OpenAsync();
+            _container = logicalParser.ContainerRecord;
+            _sources = logicalParser.DataSourceRecords;
             this.Observations.Clear();
             do
             {
