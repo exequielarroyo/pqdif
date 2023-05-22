@@ -25,8 +25,10 @@ using Windows.Storage;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Networking.Connectivity;
 using Data.Access;
-using MySqlX.XDevAPI;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Windowing;
+using Microsoft.UI;
+using Data.Contracts.Services;
 
 
 
@@ -48,7 +50,8 @@ public sealed partial class BlankWindow : Window
 
     private DatabaseContext SQLite;
     private DatabaseContext MySQL;
-    private async void NetworkInformation_NetworkStatusChanged(object sender)
+
+    private void NetworkInformation_NetworkStatusChanged(object sender)
     {
         DispatcherQueue.TryEnqueue(async () =>
         {
@@ -68,7 +71,7 @@ public sealed partial class BlankWindow : Window
 
                     var seriesToSync = from series in SQLite.Series.ToList()
                                        where series.Channel.Observation.Container.IsSync == false
-                    select series;
+                                       select series;
 
 
                     MySQL.Series.AddRange(seriesToSync);

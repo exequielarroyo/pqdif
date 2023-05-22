@@ -22,5 +22,5 @@
             <ProgressRing x:Name="dialogLoading" IsActive="False" />
         </ContentDialog>
     </Grid>
-    
+
 </Window>

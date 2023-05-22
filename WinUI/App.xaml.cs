@@ -1,9 +1,14 @@
 ﻿using System;
+using Data.Access;
+using Data.Contracts.Services;
+using H.NotifyIcon;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using WinRT;
 
 namespace WinUI;
@@ -14,24 +19,11 @@ public partial class App : Application
     public App()
     {
         this.InitializeComponent();
-        //serviceProvider = new ServiceProvider
-    }
-
-    //IServiceProvider serviceProvider;
-    private void SizeChanged(object sender, WindowSizeChangedEventArgs args)
-    {
-        //Update the title bar draggable region. We need to indent from the left both for the nav back button and to avoid the system menu
-        Windows.Graphics.RectInt32[] rects = new Windows.Graphics.RectInt32[] { new Windows.Graphics.RectInt32(96, 0, (int)args.Size.Width - 48, 48) };
-        appWindow.TitleBar.SetDragRectangles(rects);
-    }
-    private AppWindow GetAppWindow(Window window)
-    {
-        IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-        WindowId windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
-        return AppWindow.GetFromWindowId(windowId);
     }
 
     public Window m_window;
+    private AppWindow appWindow;
+
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         m_window = new BlankWindow();
@@ -44,16 +36,30 @@ public partial class App : Application
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+
+            TrySetMicaBackdrop();
         }
         m_window.Activate();
-        TrySetMicaBackdrop();
     }
-    public Window Window;
 
-    private AppWindow appWindow;
     WindowsSystemDispatcherQueueHelper m_wsdqHelper; // See separate sample below for implementation
     Microsoft.UI.Composition.SystemBackdrops.MicaController m_micaController;
     Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration m_configurationSource;
+
+    private void SizeChanged(object sender, WindowSizeChangedEventArgs args)
+    {
+        //Update the title bar draggable region. We need to indent from the left both for the nav back button and to avoid the system menu
+        Windows.Graphics.RectInt32[] rects = new Windows.Graphics.RectInt32[] { new Windows.Graphics.RectInt32(96, 0, (int)args.Size.Width - 48, 48) };
+        appWindow.TitleBar.SetDragRectangles(rects);
+    }
+
+    private AppWindow GetAppWindow(Window window)
+    {
+        IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+        WindowId windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+        return AppWindow.GetFromWindowId(windowId);
+    }
+
     bool TrySetMicaBackdrop()
     {
         if (Microsoft.UI.Composition.SystemBackdrops.MicaController.IsSupported())
