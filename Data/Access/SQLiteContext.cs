@@ -31,4 +31,25 @@ public class SQLiteContext : DatabaseContext
             .Property(c => c.IsSync)
             .HasDefaultValue(false);
     }
+
+    public override int SaveChanges()
+    {
+        var entries = ChangeTracker
+            .Entries()
+            .Where(e => e.Entity is Base && (
+                    e.State == EntityState.Added
+                    || e.State == EntityState.Modified));
+
+        foreach (var entityEntry in entries)
+        {
+            ((Base)entityEntry.Entity).UpdatedAt = DateTime.Now;
+
+            if (entityEntry.State == EntityState.Added)
+            {
+                ((Base)entityEntry.Entity).CreatedAt = DateTime.Now;
+            }
+        }
+
+        return base.SaveChanges();
+    }
 }

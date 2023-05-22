@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    public class Channel
+    public class Channel : Base
     {
         public int Id
         {
@@ -24,18 +24,6 @@ namespace Data.Models
             set;
         }
         public int MeasuredId
-        {
-            get;
-            set;
-        }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime CreatedAt
-        {
-            get;
-            set;
-        }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime UpdatedAt
         {
             get;
             set;

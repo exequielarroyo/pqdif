@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Models;
-public class Container
+public class Container : Base
 {
     public int Id
     {
@@ -28,18 +28,6 @@ public class Container
         set;
     }
     public bool IsSync
-    {
-        get;
-        set;
-    }
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public DateTime CreatedAt
-    {
-        get;
-        set;
-    }
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public DateTime UpdatedAt
     {
         get;
         set;

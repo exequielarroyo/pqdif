@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Models;
-public class Source
+public class Source : Base
 {
     public int Id
     {
@@ -29,18 +29,6 @@ public class Source
         set;
     }
     public string EquipmentId
-    {
-        get;
-        set;
-    }
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public DateTime CreatedAt
-    {
-        get;
-        set;
-    }
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public DateTime UpdatedAt
     {
         get;
         set;
