@@ -60,13 +60,13 @@ public class PreviewViewModel
 
         lineSeries.Values = observablePoints;
         lineSeries.Fill = new SolidColorPaint(SKColor.FromHsl(207, 90, 54, 100));
-        lineSeries.Name = "V Peak A";
+        lineSeries.Name = db.Channels.First().Name;
         lineSeries.LineSmoothness = 0.2;
         lineSeries.GeometrySize = 4;
         lineSeries.Stroke = new SolidColorPaint(SKColor.FromHsl(207, 90, 54, 100)) { StrokeThickness = 2 };
         lineSeries2.Values = observablePoints2;
         lineSeries2.Fill = new SolidColorPaint(SKColor.FromHsl(4, 90, 58, 100)); ;
-        lineSeries2.Name = "V Peak B";
+        lineSeries2.Name = db.Channels.ToList()[0].Name;
         lineSeries2.LineSmoothness = 0.2;
         lineSeries2.GeometrySize = 4;
         lineSeries2.Stroke = new SolidColorPaint(SKColor.FromHsl(4, 90, 58, 100)) { StrokeThickness = 2 };
@@ -74,19 +74,21 @@ public class PreviewViewModel
         this.Series = new ISeries[2];
         this.Series[0] = lineSeries;
         this.Series[1] = lineSeries2;
+
+        Title = new LabelVisual
+        {
+            Text = db.Sources.First().Name,
+            TextSize = 25,
+            Padding = new LiveChartsCore.Drawing.Padding(15),
+            Paint = new SolidColorPaint(SKColors.White)
+        };
     }
 
     public LabelVisual Title
     {
         get; set;
-    } =
-        new LabelVisual
-        {
-            Text = "Service Entrance 7100",
-            TextSize = 25,
-            Padding = new LiveChartsCore.Drawing.Padding(15),
-            Paint = new SolidColorPaint(SKColors.White)
-        };
+    }
+        
 
     public ICartesianAxis[] cartesianAxes
     {
