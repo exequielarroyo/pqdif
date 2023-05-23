@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 namespace Data.Models;
 public class Base
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    // UNCOMMENT ATTRIBUTES FOR MYSQL
+    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime CreatedAt
     {
         get; set;
     }
 
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime UpdatedAt
     {
         get; set;
