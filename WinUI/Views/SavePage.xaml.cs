@@ -92,8 +92,10 @@ public sealed partial class SavePage : Page
                 VendorId = _sources[0].VendorID.ToString(),
             };
 
-            SQLite.Container.Add(container);
-            SQLite.Source.Add(source);
+            SQLite.Containers.Add(container);
+            SQLite.Sources.Add(source);
+            MySQL.Containers.Add(container);
+            MySQL.Sources.Add(source);
 
             foreach (ObservationRecord observation in Observations)
             {
@@ -105,7 +107,8 @@ public sealed partial class SavePage : Page
                     StartAt = observation.StartTime,
                     TriggerMethod = (int)observation.TriggerMethod,
                 };
-                SQLite.Observation.Add(newObservation);
+                SQLite.Observations.Add(newObservation);
+                MySQL.Observations.Add(newObservation);
 
                 foreach (ChannelInstance channel in observation.ChannelInstances)
                 {
@@ -117,7 +120,8 @@ public sealed partial class SavePage : Page
                         ObservationId = newObservation.Id,
                         PhaseId = (int)channel.Definition.Phase,
                     };
-                    SQLite.Channel.Add(newChannel);
+                    SQLite.Channels.Add(newChannel);
+                    MySQL.Channels.Add(newChannel);
 
                     foreach (SeriesInstance series in channel.SeriesInstances)
                     {
@@ -130,6 +134,7 @@ public sealed partial class SavePage : Page
                             Values = JsonSerializer.Serialize(series.OriginalValues),
                         };
                         SQLite.Series.Add(newSeries);
+                        MySQL.Series.Add(newSeries);
 
                         if (hasInternet == NetworkConnectivityLevel.InternetAccess)
                         {
@@ -138,10 +143,11 @@ public sealed partial class SavePage : Page
                             //MySQL.SaveChanges();
                         }
 
-                        SQLite.SaveChanges();
                     }
                 }
             }
+            SQLite.SaveChanges();
+            MySQL.SaveChanges();
             dialogLoading.IsActive = false;
         }
     }
