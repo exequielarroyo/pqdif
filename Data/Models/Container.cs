@@ -27,7 +27,7 @@ public class Container : Base
         get;
         set;
     }
-    public bool IsSync
+    public bool? IsSync
     {
         get;
         set;

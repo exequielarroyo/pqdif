@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,21 +14,21 @@ namespace Data.Access;
 
 public class DatabaseContext : DbContext
 {
-    public DbSet<Container> Container
+    public DbSet<Container> Containers
     {
         get; set;
     }
-    public DbSet<Source> Source
+    public DbSet<Source> Sources
     {
         get;
         set;
     }
-    public DbSet<Observation> Observation
+    public DbSet<Observation> Observations
     {
         get;
         set;
     }
-    public DbSet<Channel> Channel
+    public DbSet<Channel> Channels
     {
         get; set;
     }
@@ -35,6 +36,4 @@ public class DatabaseContext : DbContext
     {
         get; set;
     }
-
-    
 }

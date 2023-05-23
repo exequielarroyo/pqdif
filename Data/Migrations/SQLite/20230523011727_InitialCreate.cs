@@ -12,7 +12,7 @@ namespace Data.Migrations.SQLite
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Container",
+                name: "Containers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -21,17 +21,17 @@ namespace Data.Migrations.SQLite
                     Creation = table.Column<DateTime>(type: "TEXT", nullable: false),
                     CompressionStyle = table.Column<int>(type: "INTEGER", nullable: false),
                     CompressionAlgorithm = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsSync = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    IsSync = table.Column<bool>(type: "INTEGER", nullable: true, defaultValue: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Container", x => x.Id);
+                    table.PrimaryKey("PK_Containers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Observation",
+                name: "Observations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -46,17 +46,17 @@ namespace Data.Migrations.SQLite
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Observation", x => x.Id);
+                    table.PrimaryKey("PK_Observations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Observation_Container_ContainerId",
+                        name: "FK_Observations_Containers_ContainerId",
                         column: x => x.ContainerId,
-                        principalTable: "Container",
+                        principalTable: "Containers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Source",
+                name: "Sources",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -71,17 +71,17 @@ namespace Data.Migrations.SQLite
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Source", x => x.Id);
+                    table.PrimaryKey("PK_Sources", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Source_Container_ContainerId",
+                        name: "FK_Sources_Containers_ContainerId",
                         column: x => x.ContainerId,
-                        principalTable: "Container",
+                        principalTable: "Containers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Channel",
+                name: "Channels",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -95,11 +95,11 @@ namespace Data.Migrations.SQLite
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Channel", x => x.Id);
+                    table.PrimaryKey("PK_Channels", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Channel_Observation_ObservationId",
+                        name: "FK_Channels_Observations_ObservationId",
                         column: x => x.ObservationId,
-                        principalTable: "Observation",
+                        principalTable: "Observations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -122,21 +122,21 @@ namespace Data.Migrations.SQLite
                 {
                     table.PrimaryKey("PK_Series", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Series_Channel_ChannelId",
+                        name: "FK_Series_Channels_ChannelId",
                         column: x => x.ChannelId,
-                        principalTable: "Channel",
+                        principalTable: "Channels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Channel_ObservationId",
-                table: "Channel",
+                name: "IX_Channels_ObservationId",
+                table: "Channels",
                 column: "ObservationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Observation_ContainerId",
-                table: "Observation",
+                name: "IX_Observations_ContainerId",
+                table: "Observations",
                 column: "ContainerId");
 
             migrationBuilder.CreateIndex(
@@ -145,8 +145,8 @@ namespace Data.Migrations.SQLite
                 column: "ChannelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Source_ContainerId",
-                table: "Source",
+                name: "IX_Sources_ContainerId",
+                table: "Sources",
                 column: "ContainerId",
                 unique: true);
         }
@@ -158,16 +158,16 @@ namespace Data.Migrations.SQLite
                 name: "Series");
 
             migrationBuilder.DropTable(
-                name: "Source");
+                name: "Sources");
 
             migrationBuilder.DropTable(
-                name: "Channel");
+                name: "Channels");
 
             migrationBuilder.DropTable(
-                name: "Observation");
+                name: "Observations");
 
             migrationBuilder.DropTable(
-                name: "Container");
+                name: "Containers");
         }
     }
 }

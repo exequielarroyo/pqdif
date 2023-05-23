@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Data.Models;
@@ -30,6 +31,8 @@ public class SQLiteContext : DatabaseContext
         modelBuilder.Entity<Container>()
             .Property(c => c.IsSync)
             .HasDefaultValue(false);
+
+        base.OnModelCreating(modelBuilder);
     }
 
     public override int SaveChanges()

@@ -20,5 +20,7 @@ public class MySQLContext : DatabaseContext
         modelBuilder.Entity<Container>()
             .Property(c => c.IsSync)
             .HasDefaultValue(true);
+
+        base.OnModelCreating(modelBuilder);
     }
 }
