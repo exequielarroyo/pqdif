@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations.SQLite
 {
     [DbContext(typeof(SQLiteContext))]
-    [Migration("20230523011727_InitialCreate")]
+    [Migration("20230523015733_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,7 +27,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("MeasuredId")
@@ -44,7 +43,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -67,7 +65,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Creation")
@@ -83,7 +80,6 @@ namespace Data.Migrations.SQLite
                         .HasDefaultValue(false);
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -104,7 +100,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -118,7 +113,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("tinyint");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -141,7 +135,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TypeId")
@@ -151,7 +144,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Values")
@@ -175,7 +167,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EquipmentId")
@@ -191,7 +182,6 @@ namespace Data.Migrations.SQLite
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("VendorId")
