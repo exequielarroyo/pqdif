@@ -90,6 +90,11 @@ public sealed partial class NavigationPage : Page
         {
             ContentFrame.Navigate(typeof(Views.PreviewPage), null, args.RecommendedNavigationTransitionInfo);
         }
+        //else if (args.InvokedItemContainer != null && (args.InvokedItemContainer.Tag != null))
+        //{
+        //    Type classType = Type.GetType(args.InvokedItemContainer.Tag.ToString());
+            
+        //}
         else if (args.InvokedItemContainer != null && (args.InvokedItemContainer.Tag != null))
         {
             Type newPage = Type.GetType(args.InvokedItemContainer.Tag.ToString());
@@ -149,5 +154,10 @@ public sealed partial class NavigationPage : Page
     private void NavigationViewControl_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
     {
         if (ContentFrame.CanGoBack) ContentFrame.GoBack();
+    }
+
+    private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    {
+        contentFrame.Navigate(typeof(SavePage));
     }
 }

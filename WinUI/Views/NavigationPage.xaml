@@ -132,7 +132,7 @@
                     </NavigationViewItem.Icon>
 
                 </NavigationViewItem>
-                <NavigationViewItem SelectsOnInvoked="False" >
+                <NavigationViewItem SelectsOnInvoked="False" Tag="">
                     <!--<NavigationViewItem.Icon>
                         <ImageIcon Source="{x:Bind ProfileImage}"/>
                     </NavigationViewItem.Icon>-->
@@ -148,49 +148,31 @@
             <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated" Padding="55,10,0,0"/>
         </NavigationView>
 
-        <!--<Grid x:Name="SubMenu" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="8,0,0,8" Width="500" Height="400">
-            <Rectangle Fill="{ThemeResource ResourceKey=CustomAcrylicBrush}" />
+        <Border Width="500" Height="400" 
+                Background="{ThemeResource ResourceKey=CustomAcrylicBrush}" 
+                CornerRadius="5" 
+                Visibility="Collapsed">
+            <Grid HorizontalAlignment="Left">
+                <NavigationView
+                    IsBackButtonVisible="Collapsed"
+                    IsSettingsVisible="False"
+                    PaneDisplayMode="Left"
+                    IsPaneToggleButtonVisible="False"
+                    ItemInvoked="NavigationView_ItemInvoked">
+                    <NavigationView.MenuItems>
+                        <NavigationViewItem Icon="Play" Content="Menu Item1" Tag="SamplePage1" />
+                        <NavigationViewItem Icon="Save" Content="Menu Item2" Tag="SamplePage2" />
+                        <NavigationViewItem Icon="Refresh" Content="Menu Item3" Tag="SamplePage3" />
+                        <NavigationViewItem Icon="Download" Content="Menu Item4" Tag="SamplePage4" />
+                    </NavigationView.MenuItems>
+                    <NavigationView.FooterMenuItems>
+                        <NavigationViewItem Content="Hello" Icon="Folder"/>
+                    </NavigationView.FooterMenuItems>
+                    <Frame x:Name="contentFrame"/>
+                </NavigationView>
+            </Grid>
+        </Border>
 
-            <NavigationView IsBackButtonVisible="Collapsed" 
-                            IsPaneToggleButtonVisible="False"
-                            >
-                <NavigationView.HeaderTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,-10,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid x:Name="pageTitle"
-                            Background="Transparent"
-                            Height="44"
-                            VerticalAlignment="Top">
-                                <TextBlock x:Name="title" 
-                                Style="{StaticResource TitleTextBlockStyle}"
-                                FontSize="24"
-                                VerticalAlignment="Center"
-                                Text="{Binding}"/>
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </NavigationView.HeaderTemplate>
-
-                <StackPanel Spacing="144" Padding="2">
-                    <StackPanel>
-                        <NavigationViewItem Icon="Mail" Content="General"/>
-                        <NavigationViewItem Icon="ContactInfo" Content="Account"/>
-                        <NavigationViewItem Icon="Account" Content="Notification"/>
-                        <NavigationViewItem Icon="Folder" Content="Storage"/>
-                        <NavigationViewItem Icon="Help" Content="Help"/>
-                    </StackPanel>
-
-                    <StackPanel>
-                        <NavigationViewItem Icon="Pictures" Content="Profile"/>
-                    </StackPanel>
-                </StackPanel>
-
-            </NavigationView>
-        </Grid>-->
     </Grid>
 
 </Page>
