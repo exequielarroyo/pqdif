@@ -18,12 +18,14 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using Microsoft.Windows.AppLifecycle;
 using MySqlX.XDevAPI;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Networking.Connectivity;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
+using WinUI.Helpers;
 //using Windows.Storage;
 //using Windows.Storage.AccessCache;
 //using Windows.Storage.Pickers;
@@ -59,13 +61,41 @@ public sealed partial class SyncPage : Page
             //StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
             chooseLabel.Text = $"Picked folder: {folder.Path}";
 
-            FileSystemWatcher watcher = new FileSystemWatcher(folder.Path);
-            watcher.Filter = "*.*";
-            watcher.Created += Watcher_Created;
-            watcher.EnableRaisingEvents = true;
+            //FileSystemWatcher watcher = new FileSystemWatcher(folder.Path);
+            //watcher.Filter = "*.*";
+            //watcher.Created += Watcher_Created;
+            //watcher.EnableRaisingEvents = true;
+            RegisterBackgroundTask("");
         }
 
         await SaveReg();
+    }
+
+    private void CheckBackgroundTask()
+    {
+        var taskRegistered = false;
+        var exampleTaskName = "FileChangeBackgroundTask";
+
+        foreach (var task in BackgroundTaskRegistration.AllTasks)
+        {
+            if (task.Value.Name == exampleTaskName)
+            {
+                taskRegistered = true;
+                RegisterBackgroundTask(exampleTaskName);
+                break;
+            }
+        }
+    }
+
+    private void RegisterBackgroundTask(string exampleTaskName)
+    {
+        var builder = new BackgroundTaskBuilder();
+
+        builder.Name = "FileChangeBackgroundTask";
+        //builder.TaskEntryPoint = typeof(FileChangeBackgroundTask).FullName;
+        builder.TaskEntryPoint = "WinUI.Helpers.FileChangeBackgrounTask";
+        builder.SetTrigger(new SystemTrigger(SystemTriggerType.TimeZoneChange, false));
+        builder.Register();
     }
 
     private async Task SaveReg()
@@ -79,13 +109,12 @@ public sealed partial class SyncPage : Page
         registryKey.SetValue("Winui", $"{System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName}", RegistryValueKind.String);
         registryKey.Close();
     }
+
     private void Watcher_Created(object sender, FileSystemEventArgs e)
     {
-
         DispatcherQueue.TryEnqueue(() =>
         {
             chooseLabel.Text = $"New file: {e.Name}";
         });
-        
     }
 }
